@@ -4,5 +4,9 @@
 
 #ifndef HW3PARTC_SNIPER_H
 #define HW3PARTC_SNIPER_H
+namespace mtm{
+    class Sniper{
 
+    };
+}
 #endif //HW3PARTC_SNIPER_H

@@ -6,7 +6,7 @@
 #define HW3PARTB_MATRIX_H
 
 #include "TemArray.h"
-#include "Auxiliaries.h"
+#include "../Auxiliaries.h"
 
 namespace mtm {
     template<class T>

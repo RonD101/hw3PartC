@@ -4,5 +4,12 @@
 
 #ifndef HW3PARTC_GAME_H
 #define HW3PARTC_GAME_H
+#include "Auxiliaries.h"
 
+namespace mtm{
+    class Game{
+    public:
+        void reload(const GridPoint & coordinates);
+    };
+}
 #endif //HW3PARTC_GAME_H
