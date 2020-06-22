@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/rond/Desktop/רון/טכניון/סמסטר ב/מבוא לתכנות מערכות/hw3/hw3PartC/main.cpp
+iostream
+-
+
