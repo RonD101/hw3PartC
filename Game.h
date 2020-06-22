@@ -5,9 +5,11 @@
 #ifndef HW3PARTC_GAME_H
 #define HW3PARTC_GAME_H
 #include "Auxiliaries.h"
+#include "Matrix.h"
 
 namespace mtm{
     class Game{
+        Matrix<
     public:
         void reload(const GridPoint & coordinates);
     };

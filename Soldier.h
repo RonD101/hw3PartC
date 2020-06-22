@@ -9,9 +9,7 @@
 
 namespace mtm{
 class Soldier: public Character{
-        void f(){
-            health =3;
-        }
+
     };
 
 }

@@ -3,3 +3,7 @@
 //
 
 #include "Game.h"
+
+void mtm::Game::reload(const mtm::GridPoint &coordinates) {
+
+}
