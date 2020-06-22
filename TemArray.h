@@ -6,7 +6,7 @@
 #define HW3PARTB_TEMARRAY_H
 
 #include <iostream>
-#include "PartA/Auxiliaries.h"
+#include "Auxiliaries.h"
 #include <string>
 
 namespace mtm {

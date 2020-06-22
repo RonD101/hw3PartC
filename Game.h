@@ -6,9 +6,12 @@
 #define HW3PARTC_GAME_H
 #include "Auxiliaries.h"
 #include "Matrix.h"
+#include "Character.h"
 
 namespace mtm{
     class Game{
+        Matrix<Character> board;
+        std::shared_ptr<Character> getCharacter(const GridPoint coordinates);
     public:
         void reload(const GridPoint & coordinates);
     };
