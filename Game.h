@@ -9,7 +9,6 @@
 
 namespace mtm{
     class Game{
-        Matrix<
     public:
         void reload(const GridPoint & coordinates);
     };
