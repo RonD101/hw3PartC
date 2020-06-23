@@ -6,12 +6,28 @@
 #include "EmptySlot.h"
 #include <memory>
 
+using std::shared_ptr;
+
 void mtm::Game::reload(const mtm::GridPoint &coordinates) {
-//    std::shared_ptr<Character> character =
+    shared_ptr<Character> character = getCharacter(coordinates);
+
+    try {
+        character->addAmmo(character->reload());
+    }catch (EmptySlot::EmptyCell&)
+    {
+        throw Game::CellEmpty();
+    }
+
 }
 
 std::shared_ptr<mtm::Character> mtm::Game::getCharacter(const mtm::GridPoint& coordinates) {
-    return board(coordinates.row + 1,coordinates.col + 1);
+    try {
+        return board(coordinates.row + 1,coordinates.col + 1);
+    }catch(Matrix<Character>::AccessIllegalElement&)
+    {
+        throw IllegalCell();
+    }
+
 }
 
 mtm::Game::Game(int height, int width) : board(Matrix<std::shared_ptr<Character>>

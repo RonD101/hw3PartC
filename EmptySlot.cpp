@@ -15,3 +15,7 @@ mtm::EmptySlot::~EmptySlot() {
 
 mtm::EmptySlot::EmptySlot() {
 }
+
+int mtm::EmptySlot::reload() const {
+    throw EmptySlot::EmptyCell();
+}
