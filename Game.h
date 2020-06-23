@@ -17,6 +17,7 @@ namespace mtm{
         class CellEmpty;
         class IllegalCell;
         Game(int height, int width);
+        Game(const Game& game):board(game.board){}
         Game &operator=(const Game& other);
         void reload(const GridPoint & coordinates);
     };

@@ -21,5 +21,6 @@ int main() {
     {
         cout << e.what() << endl;
     }
+    Game g3(g);
     return 0;
 }
