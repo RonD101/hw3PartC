@@ -7,6 +7,8 @@ using std::endl;
 
 int main() {
     Game g(2,3);
+    Game g2(11, 4);
+    g2 = g;
     try {
         g.reload(GridPoint(0,0));
     }catch (mtm::Game::Exception& e)

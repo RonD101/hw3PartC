@@ -32,3 +32,12 @@ std::shared_ptr<mtm::Character> mtm::Game::getCharacter(const mtm::GridPoint& co
 
 mtm::Game::Game(int height, int width) : board(Matrix<std::shared_ptr<Character>>
           (Dimensions(height,width),std::shared_ptr<Character>(new EmptySlot()))){}
+
+mtm::Game& mtm::Game::operator=(const mtm::Game &other) {
+    if(this == & other)
+    {
+        return *this;
+    }
+    this->board = other.board;
+    return *this;
+}
