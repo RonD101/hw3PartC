@@ -4,8 +4,12 @@
 
 #ifndef HW3PARTC_SNIPER_H
 #define HW3PARTC_SNIPER_H
+
+#include "Character.h"
+#include <memory>
+
 namespace mtm{
-    class Sniper{
+    class Sniper: public Character{
 
     };
 }

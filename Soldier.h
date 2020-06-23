@@ -6,10 +6,13 @@
 #define HW3PARTC_SOLDIER_H
 
 #include "Character.h"
+#include <memory>
 
 namespace mtm{
 class Soldier: public Character{
-
+    public:
+        std::shared_ptr<Character> clone() const override;
+        virtual int reload() const override ;
     };
 
 }

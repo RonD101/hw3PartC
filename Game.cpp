@@ -23,7 +23,7 @@ void mtm::Game::reload(const mtm::GridPoint &coordinates) {
 std::shared_ptr<mtm::Character> mtm::Game::getCharacter(const mtm::GridPoint& coordinates) {
     try {
         return board(coordinates.row + 1,coordinates.col + 1);
-    }catch(Matrix<Character>::AccessIllegalElement&)
+    }catch(Matrix<std::shared_ptr<Character>>::AccessIllegalElement&)
     {
         throw IllegalCell();
     }
