@@ -4,10 +4,10 @@
 
 #include "Soldier.h"
 
+#define AMMO_RELOAD 3
+
 using namespace mtm;
 using std::shared_ptr;
-
-#define AMMO_RELOAD 3
 
 std::shared_ptr<Character> mtm::Soldier::clone() const {
     return shared_ptr<Character>(new Soldier(*this));

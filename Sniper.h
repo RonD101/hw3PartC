@@ -10,7 +10,8 @@
 
 namespace mtm{
     class Sniper: public Character{
-
+        std::shared_ptr<Character> clone() const override;
+        virtual int reload() const override ;
     };
 }
 #endif //HW3PARTC_SNIPER_H
