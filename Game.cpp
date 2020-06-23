@@ -10,7 +10,7 @@ void mtm::Game::reload(const mtm::GridPoint &coordinates) {
 //    std::shared_ptr<Character> character =
 }
 
-std::shared_ptr<mtm::Character> mtm::Game::getCharacter(const mtm::GridPoint coordinates) {
+std::shared_ptr<mtm::Character> mtm::Game::getCharacter(const mtm::GridPoint& coordinates) {
     return board(coordinates.row + 1,coordinates.col + 1);
 }
 
