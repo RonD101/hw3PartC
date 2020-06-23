@@ -3,6 +3,7 @@
 //
 
 #include "Game.h"
+#include "EmptySlot.h"
 #include <memory>
 
 void mtm::Game::reload(const mtm::GridPoint &coordinates) {
@@ -10,6 +11,8 @@ void mtm::Game::reload(const mtm::GridPoint &coordinates) {
 }
 
 std::shared_ptr<mtm::Character> mtm::Game::getCharacter(const mtm::GridPoint coordinates) {
-    std::shared_ptr<Character> c(&board(coordinates.row,coordinates.col));
-    return c;
+    return board(coordinates.row + 1,coordinates.col + 1);
 }
+
+mtm::Game::Game(int height, int width) : board(Matrix<std::shared_ptr<Character>>
+          (Dimensions(height,width),std::shared_ptr<Character>(new EmptySlot()))){}

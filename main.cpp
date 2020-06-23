@@ -1,6 +1,11 @@
 #include <iostream>
+#include "Game.h"
+
+using namespace mtm;
+using std::cout;
+using std::endl;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Game(2,3);
     return 0;
 }

@@ -5,6 +5,8 @@
 #ifndef HW3PARTC_CHARACTER_H
 #define HW3PARTC_CHARACTER_H
 
+#include <memory>
+
 namespace mtm{
     class Character{
     protected:
@@ -14,7 +16,7 @@ namespace mtm{
         int power;
     public:
         virtual ~Character();
-        virtual Character* clone() const = 0;
+        virtual std::shared_ptr<Character> clone() const = 0;
     };
 }
 

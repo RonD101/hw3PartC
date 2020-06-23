@@ -10,9 +10,10 @@
 
 namespace mtm{
     class Game{
-        Matrix<Character> board;
+        Matrix<std::shared_ptr<Character>> board;
         std::shared_ptr<Character> getCharacter(const GridPoint coordinates);
     public:
+        Game(int height, int width);
         void reload(const GridPoint & coordinates);
     };
 }
