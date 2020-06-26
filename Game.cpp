@@ -21,7 +21,7 @@ void mtm::Game::reload(const mtm::GridPoint &coordinates) {
 
 void mtm::Game::move(const mtm::GridPoint &src_coordinates, const mtm::GridPoint &dst_coordinates) {
     shared_ptr<Character> character = getCharacter(src_coordinates);
-    if(character == nullptr)
+    if(character == nullptr) // if the source coordinates are empty, throw exception
     {
         throw CellEmpty();
     }
