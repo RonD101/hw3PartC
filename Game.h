@@ -25,6 +25,6 @@ namespace mtm{
         static int distance(const GridPoint &src_coordinates, const GridPoint &dst_coordinates);
         friend std::ostream& operator<<(std::ostream& os, const Game &game);
     };
-    std::ostream& operator<<(std::ostream& os, const Game game);
+    std::ostream& operator<<(std::ostream& os, const Game &game);
 }
 #endif //HW3PARTC_GAME_H
