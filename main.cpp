@@ -22,5 +22,11 @@ int main() {
         cout << e.what() << endl;
     }
     Game g3(g);
+    try {
+        Game g4(-2,-5);
+    }catch (mtm::Game::Exception& e)
+    {
+        cout << e.what() << endl;
+    }
     return 0;
 }
