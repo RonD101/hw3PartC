@@ -17,6 +17,10 @@ int mtm::Sniper::reload() const {
     return AMMO_RELOAD;
 }
 
-char Sniper::getType() const {
-    return type;
+char Sniper::getTypeChar() const {
+    return typeChar;
+}
+
+CharacterType Sniper::getType() const {
+    return MEDIC;
 }

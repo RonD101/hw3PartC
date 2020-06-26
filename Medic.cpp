@@ -13,6 +13,10 @@ std::shared_ptr<mtm::Character> mtm::Medic::clone() const {
     return std::shared_ptr<Character>(new Medic(*this));
 }
 
-char mtm::Medic::getType() const {
-    return type;
+char mtm::Medic::getTypeChar() const {
+    return typeChar;
+}
+
+mtm::CharacterType mtm::Medic::getType() const {
+    return MEDIC;
 }

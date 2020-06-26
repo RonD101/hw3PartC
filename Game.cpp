@@ -3,7 +3,6 @@
 //
 
 #include "Game.h"
-#include "EmptySlot.h"
 #include <memory>
 #include "Exception.h"
 
@@ -12,13 +11,16 @@ using namespace mtm;
 
 void mtm::Game::reload(const mtm::GridPoint &coordinates) {
     shared_ptr<Character> character = getCharacter(coordinates);
-
-    try {
-        character->addAmmo(character->reload());
-    }catch (EmptySlot::EmptyCell&)
+    if(character == nullptr)
     {
         throw CellEmpty();
     }
+//    try {
+//        character->addAmmo(character->reload());
+//    }catch (EmptySlot::EmptyCell&)
+//    {
+//        throw CellEmpty();
+//    }
 
 }
 
@@ -33,8 +35,7 @@ std::shared_ptr<mtm::Character> mtm::Game::getCharacter(const mtm::GridPoint& co
 }
 
 mtm::Game::Game(int height, int width) : board((height <=0 || width <= 0) ? throw IllegalArgument() :
-    Matrix<std::shared_ptr<Character>>(Dimensions(height,width),
-            std::shared_ptr<Character>(new EmptySlot()))){}
+    Matrix<std::shared_ptr<Character>>(Dimensions(height,width), nullptr)){}
 
 mtm::Game& mtm::Game::operator=(const mtm::Game &other)
 {
@@ -50,10 +51,14 @@ std::ostream& mtm::operator<<(std::ostream &os, const Game game) {
     std::string board_symbol;
     for (int i = 0; i < game.board.height(); ++i) {
         for (int j = 0; j < game.board.width(); ++j) {
-            board_symbol += game.getCharacter(GridPoint(i,j))->getType();
+            board_symbol += game.getCharacter(GridPoint(i,j))->getTypeChar();
         }
     }
     mtm::printGameBoard(os,board_symbol.c_str(),board_symbol.c_str()+board_symbol.length(),game.board.width());
     return os;
+}
+
+void Game::addCharacter(const GridPoint &coordinates, std::shared_ptr<Character> character) {
+
 }
 

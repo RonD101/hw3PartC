@@ -6,20 +6,22 @@
 #define HW3PARTC_CHARACTER_H
 
 #include <memory>
+#include "Auxiliaries.h"
 
 namespace mtm{
     class Character{
     protected:
-        int health;
-        int ammo;
-        int range;
-        int power;
+        units_t health;
+        units_t ammo;
+        units_t range;
+        units_t power;
     public:
         virtual ~Character();
         virtual std::shared_ptr<Character> clone() const = 0;
         void addAmmo(int add_ammo);
         virtual int reload() const = 0;
-        virtual char getType() const= 0;
+        virtual char getTypeChar() const= 0;
+        virtual CharacterType getType() const= 0;
     };
 }
 

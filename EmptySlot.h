@@ -10,14 +10,14 @@
 
 namespace mtm{
     class EmptySlot: public Character{
-        static const char type = ' ';
+        static const char typeChar = ' ';
     public:
         class EmptyCell;
-        EmptySlot();
-        ~EmptySlot() override;
+        EmptySlot() = default;
+        ~EmptySlot() override = default;
         std::shared_ptr<Character> clone() const override;
         virtual int reload() const override ;
-        char getType() const override ;
+        char getTypeChar() const override ;
     };
 
     class EmptySlot::EmptyCell  : public std::exception {};

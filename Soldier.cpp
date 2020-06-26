@@ -17,6 +17,10 @@ int mtm::Soldier::reload() const {
     return AMMO_RELOAD;
 }
 
-char Soldier::getType() const {
-    return type;
+char Soldier::getTypeChar() const {
+    return typeChar;
+}
+
+CharacterType Soldier::getType() const {
+    return MEDIC;
 }

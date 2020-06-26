@@ -16,6 +16,7 @@ namespace mtm{
         Game(int height, int width);
         Game(const Game& game):board(game.board){}
         Game &operator=(const Game& other);
+        void addCharacter(const GridPoint& coordinates, std::shared_ptr<Character> character);
         void reload(const GridPoint & coordinates);
         friend std::ostream& operator<<(std::ostream& os, const Game game);
     };

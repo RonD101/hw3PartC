@@ -10,16 +10,10 @@ shared_ptr<mtm::Character> mtm::EmptySlot::clone() const {
     return shared_ptr<Character>(new EmptySlot(*this));
 }
 
-mtm::EmptySlot::~EmptySlot() {
-}
-
-mtm::EmptySlot::EmptySlot() {
-}
-
 int mtm::EmptySlot::reload() const {
     throw EmptySlot::EmptyCell();
 }
 
-char mtm::EmptySlot::getType() const {
-    return type;
+char mtm::EmptySlot::getTypeChar() const {
+    return typeChar;
 }

@@ -10,11 +10,13 @@
 
 namespace mtm{
 class Soldier: public Character{
-    static const char type = 'S';
+    static const char typeChar = 'S';
+    static const CharacterType type = SOLDIER;
 public:
         std::shared_ptr<Character> clone() const override;
         virtual int reload() const override ;
-        char getType() const override ;
+        char getTypeChar() const override ;
+        CharacterType getType() const override ;
     };
 
 }
