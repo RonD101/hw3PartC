@@ -8,6 +8,7 @@
 #include "Exception.h"
 
 using std::shared_ptr;
+using namespace mtm;
 
 void mtm::Game::reload(const mtm::GridPoint &coordinates) {
     shared_ptr<Character> character = getCharacter(coordinates);
@@ -21,7 +22,7 @@ void mtm::Game::reload(const mtm::GridPoint &coordinates) {
 
 }
 
-std::shared_ptr<mtm::Character> mtm::Game::getCharacter(const mtm::GridPoint& coordinates) {
+std::shared_ptr<mtm::Character> mtm::Game::getCharacter(const mtm::GridPoint& coordinates) const{
     try {
         return board(coordinates.row + 1,coordinates.col + 1);
     }catch(Matrix<std::shared_ptr<Character>>::AccessIllegalElement&)
@@ -44,3 +45,15 @@ mtm::Game& mtm::Game::operator=(const mtm::Game &other)
     this->board = other.board;
     return *this;
 }
+
+std::ostream& mtm::operator<<(std::ostream &os, const Game game) {
+    std::string board_symbol;
+    for (int i = 0; i < game.board.height(); ++i) {
+        for (int j = 0; j < game.board.width(); ++j) {
+            board_symbol += game.getCharacter(GridPoint(i,j))->getType();
+        }
+    }
+    mtm::printGameBoard(os,board_symbol.c_str(),board_symbol.c_str()+board_symbol.length(),game.board.width());
+    return os;
+}
+

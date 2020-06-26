@@ -16,3 +16,7 @@ std::shared_ptr<Character> mtm::Sniper::clone() const {
 int mtm::Sniper::reload() const {
     return AMMO_RELOAD;
 }
+
+char Sniper::getType() const {
+    return type;
+}

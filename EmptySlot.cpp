@@ -19,3 +19,7 @@ mtm::EmptySlot::EmptySlot() {
 int mtm::EmptySlot::reload() const {
     throw EmptySlot::EmptyCell();
 }
+
+char mtm::EmptySlot::getType() const {
+    return type;
+}

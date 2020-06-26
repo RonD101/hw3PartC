@@ -16,3 +16,7 @@ std::shared_ptr<Character> mtm::Soldier::clone() const {
 int mtm::Soldier::reload() const {
     return AMMO_RELOAD;
 }
+
+char Soldier::getType() const {
+    return type;
+}

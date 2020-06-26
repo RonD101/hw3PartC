@@ -12,3 +12,7 @@ int mtm::Medic::reload() const {
 std::shared_ptr<mtm::Character> mtm::Medic::clone() const {
     return std::shared_ptr<Character>(new Medic(*this));
 }
+
+char mtm::Medic::getType() const {
+    return type;
+}

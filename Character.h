@@ -19,6 +19,7 @@ namespace mtm{
         virtual std::shared_ptr<Character> clone() const = 0;
         void addAmmo(int add_ammo);
         virtual int reload() const = 0;
+        virtual char getType() const= 0;
     };
 }
 

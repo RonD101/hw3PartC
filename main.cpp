@@ -6,6 +6,9 @@ using std::cout;
 using std::endl;
 
 int main() {
+//    Matrix<int> m(Dimensions(2,3));
+//    m(2,3) = 5;
+//    cout << m << endl;
     Game g(2,3);
     Game g2(11, 4);
     g2 = g;
@@ -28,5 +31,6 @@ int main() {
     {
         cout << e.what() << endl;
     }
+    cout << g << endl;
     return 0;
 }

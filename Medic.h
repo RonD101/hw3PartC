@@ -9,10 +9,12 @@
 #include <memory>
 
 namespace mtm{
-class Medic: public Character{
+    class Medic: public Character{
+        static const char type = 'M';
     public:
         std::shared_ptr<Character> clone() const override;
         virtual int reload() const override;
-    };
+        char getType() const override ;
+};
 }
 #endif //HW3PARTC_MEDIC_H
