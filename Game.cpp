@@ -5,6 +5,8 @@
 #include "Game.h"
 #include <memory>
 #include "Soldier.h"
+#include "Medic.h"
+#include "Sniper.h"
 
 #define SPACE ' '
 
@@ -105,10 +107,10 @@ Game::makeCharacter(CharacterType type, Team team, units_t health, units_t ammo,
             return std::shared_ptr<Character>(new Soldier(type,team,health,ammo,range,power));
             break;
         case MEDIC:
-            return std::shared_ptr<Character>(new Soldier(type,team,health,ammo,range,power));
+            return std::shared_ptr<Character>(new Medic(type,team,health,ammo,range,power));
             break;
         case SNIPER:
-            return std::shared_ptr<Character>(new Soldier(type,team,health,ammo,range,power));
+            return std::shared_ptr<Character>(new Sniper(type,team,health,ammo,range,power));
             break;
     }
     return nullptr;
