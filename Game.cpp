@@ -111,5 +111,6 @@ Game::makeCharacter(CharacterType type, Team team, units_t health, units_t ammo,
             return std::shared_ptr<Character>(new Soldier(type,team,health,ammo,range,power));
             break;
     }
+    return nullptr;
 }
 
