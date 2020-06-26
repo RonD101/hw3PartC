@@ -11,10 +11,11 @@
 namespace mtm{
     class Sniper: public Character{
         static const char typeChar = 'N';
-        static const CharacterType type = SNIPER;
     public:
         std::shared_ptr<Character> clone() const override;
-        virtual int reload() const override ;
+        int reload() const override ;
+        bool legalMove(const GridPoint src, const GridPoint dst) const override ;
+//        void move(const GridPoint &src_coordinates, const GridPoint &dst_coordinates) const override;
         char getTypeChar() const override ;
         CharacterType getType() const override ;
     };

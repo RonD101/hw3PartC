@@ -4,7 +4,6 @@
 
 #include "Game.h"
 #include <memory>
-#include "Exception.h"
 
 using std::shared_ptr;
 using namespace mtm;
@@ -15,13 +14,24 @@ void mtm::Game::reload(const mtm::GridPoint &coordinates) {
     {
         throw CellEmpty();
     }
-//    try {
-//        character->addAmmo(character->reload());
-//    }catch (EmptySlot::EmptyCell&)
-//    {
-//        throw CellEmpty();
-//    }
 
+}
+
+void mtm::Game::move(const mtm::GridPoint &src_coordinates, const mtm::GridPoint &dst_coordinates) {
+    shared_ptr<Character> character = getCharacter(src_coordinates);
+    if(character == nullptr)
+    {
+        throw CellEmpty();
+    }
+    if(!getCharacter(dst_coordinates) && character->legalMove(src_coordinates, dst_coordinates))
+    {
+        board(dst_coordinates.row,dst_coordinates.col) = board(src_coordinates.row,src_coordinates.col);
+        board(src_coordinates.row,src_coordinates.col) = nullptr;
+
+    }else
+    {
+        throw CellOccupied();
+    }
 }
 
 std::shared_ptr<mtm::Character> mtm::Game::getCharacter(const mtm::GridPoint& coordinates) const{
@@ -47,7 +57,12 @@ mtm::Game& mtm::Game::operator=(const mtm::Game &other)
     return *this;
 }
 
-std::ostream& mtm::operator<<(std::ostream &os, const Game game) {
+int Game::distance(const GridPoint &src_coordinates, const GridPoint &dst_coordinates) {
+    return abs(src_coordinates.row - dst_coordinates.row) +
+        abs(src_coordinates.col - dst_coordinates.col);
+}
+
+std::ostream& mtm::operator<<(std::ostream &os, const Game &game) {
     std::string board_symbol;
     for (int i = 0; i < game.board.height(); ++i) {
         for (int j = 0; j < game.board.width(); ++j) {

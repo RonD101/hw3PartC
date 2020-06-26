@@ -3,8 +3,10 @@
 //
 
 #include "Sniper.h"
+#include "Game.h"
 
 #define AMMO_RELOAD 2
+#define STEPS_NUM 4
 
 using namespace mtm;
 using std::shared_ptr;
@@ -22,5 +24,11 @@ char Sniper::getTypeChar() const {
 }
 
 CharacterType Sniper::getType() const {
-    return MEDIC;
+    return SNIPER;
 }
+
+bool Sniper::legalMove(const GridPoint src, const GridPoint dst) const {
+    return Game::distance(src, dst) <= STEPS_NUM;
+}
+
+

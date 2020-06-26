@@ -11,4 +11,3 @@ mtm::Character::~Character() {
 void mtm::Character::addAmmo(int add_ammo) {
     ammo += add_ammo;
 }
-

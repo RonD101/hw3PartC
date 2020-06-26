@@ -15,6 +15,7 @@ namespace mtm{
         units_t ammo;
         units_t range;
         units_t power;
+        GridPoint position;
     public:
         virtual ~Character();
         virtual std::shared_ptr<Character> clone() const = 0;
@@ -22,6 +23,7 @@ namespace mtm{
         virtual int reload() const = 0;
         virtual char getTypeChar() const= 0;
         virtual CharacterType getType() const= 0;
+        virtual bool legalMove(const GridPoint src, const GridPoint dst) const = 0;
     };
 }
 

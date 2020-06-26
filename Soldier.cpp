@@ -3,8 +3,10 @@
 //
 
 #include "Soldier.h"
+#include "Game.h"
 
 #define AMMO_RELOAD 3
+#define STEPS_NUM 3
 
 using namespace mtm;
 using std::shared_ptr;
@@ -22,5 +24,9 @@ char Soldier::getTypeChar() const {
 }
 
 CharacterType Soldier::getType() const {
-    return MEDIC;
+    return SOLDIER;
+}
+
+bool Soldier::legalMove(const GridPoint src, const GridPoint dst) const {
+    return Game::distance(src, dst) <= STEPS_NUM;
 }

@@ -3,7 +3,9 @@
 //
 
 #include "Medic.h"
+#include "Game.h"
 #define AMMO_RELOAD 5
+#define STEPS_NUM 5
 
 int mtm::Medic::reload() const {
     return AMMO_RELOAD;
@@ -19,4 +21,8 @@ char mtm::Medic::getTypeChar() const {
 
 mtm::CharacterType mtm::Medic::getType() const {
     return MEDIC;
+}
+
+bool mtm::Medic::legalMove(const mtm::GridPoint src, const mtm::GridPoint dst) const {
+    return Game::distance(src, dst) <= STEPS_NUM;
 }
