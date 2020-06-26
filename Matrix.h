@@ -8,7 +8,6 @@
 #include "TemArray.h"
 #include "Auxiliaries.h"
 #include "Exception.h"
-
 namespace mtm {
     template<class T>
     class Matrix {
@@ -208,9 +207,9 @@ namespace mtm {
             row[i] = TemArray<T>(dim_col);
         }
         //setting default value
-        for (int i = 1; i <= dim_row; ++i)
+        for (int i = 0; i < dim_row; ++i)
         {
-            for (int j = 1; j <= dim_col; ++j)
+            for (int j = 0; j < dim_col; ++j)
             {
                 (*this)(i,j) = value;
             }
@@ -227,9 +226,9 @@ namespace mtm {
             row[i] = TemArray<T>(dim.getCol());
         }
         //setting default value
-        for (int i = 1; i <= dim.getRow(); ++i)
+        for (int i = 0; i < dim.getRow(); ++i)
         {
-            for (int j = 1; j <= dim.getCol(); ++j)
+            for (int j = 0; j < dim.getCol(); ++j)
             {
                 (*this)(i,j) = matrix(i,j);
             }
@@ -358,9 +357,9 @@ namespace mtm {
             row[i] = TemArray<T>(dim.getCol());
         }
         //setting new values
-        for (int j = 1; j <= this->height(); ++j)
+        for (int j = 0; j < this->height(); ++j)
         {
-            for (int i = 1; i <= this->width(); ++i)
+            for (int i = 0; i < this->width(); ++i)
             {
                 (*this)(j,i) = matrix(j,i);
             }
@@ -429,7 +428,7 @@ namespace mtm {
     T& Matrix<T>::operator()(int row_num, int col_num)
     {
         try {
-            return row[row_num - 1][col_num - 1];
+            return row[row_num][col_num];
         }
         //we catch if there is illegal access in TemArray and rethrow it as Martix::AccessIllegalElement
         catch (std::exception& e){
@@ -441,7 +440,7 @@ namespace mtm {
     const T& Matrix<T>::operator()(int row_num, int col_num) const
     {
         try {
-            return row[row_num - 1][col_num - 1];
+            return row[row_num][col_num];
         }
         //we catch if there is illegal access in TemArray and rethrow it as Martix::AccessIllegalElement
         catch (std::exception& e){
