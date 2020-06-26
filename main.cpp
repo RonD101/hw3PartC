@@ -32,5 +32,17 @@ int main() {
         cout << e.what() << endl;
     }
     cout << g << endl;
+    try {
+        g.addCharacter(GridPoint(-2,0), nullptr);
+
+    }catch (mtm::GameException& e){
+        cout << e.what() << endl;
+    }
+    std::shared_ptr<Character> player1 = Game::makeCharacter(SNIPER,CPP,3,4,4,3);
+    g.addCharacter(GridPoint(0,0),player1);
+    cout << g << endl;
+    g.move(GridPoint(0,0),GridPoint(0,1));
+    cout << g << endl;
+
     return 0;
 }

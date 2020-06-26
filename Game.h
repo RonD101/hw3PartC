@@ -18,6 +18,8 @@ namespace mtm{
         Game(const Game& game):board(game.board){}
         Game &operator=(const Game& other);
         void addCharacter(const GridPoint& coordinates, std::shared_ptr<Character> character);
+        static std::shared_ptr<Character> makeCharacter(CharacterType type, Team team,
+                                                        units_t health, units_t ammo, units_t range, units_t power);
         void reload(const GridPoint & coordinates);
         void move(const GridPoint &src_coordinates, const GridPoint &dst_coordinates);
         friend std::ostream& operator<<(std::ostream& os, const Game &game);

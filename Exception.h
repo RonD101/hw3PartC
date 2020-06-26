@@ -32,18 +32,18 @@ namespace mtm{
             return "A game related error has occurred: CellEmpty";
         }
     };
-    class MoveTooFar  : public mtm::GameException {
-    public:
-        const char* what() const noexcept override
-        {
-            return "A game related error has occurred: MoveTooFar";
-        }
-    };
     class CellOccupied  : public mtm::GameException {
     public:
         const char* what() const noexcept override
         {
             return "A game related error has occurred: CellOccupied";
+        }
+    };
+    class MoveTooFar  : public mtm::GameException {
+    public:
+        const char* what() const noexcept override
+        {
+            return "A game related error has occurred: MoveTooFar";
         }
     };
     class OutOfRange  : public mtm::GameException {

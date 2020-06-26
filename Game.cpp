@@ -4,6 +4,7 @@
 
 #include "Game.h"
 #include <memory>
+#include "Soldier.h"
 
 #define SPACE ' '
 
@@ -90,6 +91,25 @@ std::ostream& mtm::operator<<(std::ostream &os, const Game &game) {
 }
 
 void Game::addCharacter(const GridPoint &coordinates, std::shared_ptr<Character> character) {
+    if(getCharacter(coordinates) != nullptr)
+    {
+        throw CellOccupied();
+    }
+    board(coordinates.row,coordinates.col) = character;
+}
 
+std::shared_ptr<Character>
+Game::makeCharacter(CharacterType type, Team team, units_t health, units_t ammo, units_t range, units_t power) {
+    switch (type){
+        case SOLDIER:
+            return std::shared_ptr<Character>(new Soldier(type,team,health,ammo,range,power));
+            break;
+        case MEDIC:
+            return std::shared_ptr<Character>(new Soldier(type,team,health,ammo,range,power));
+            break;
+        case SNIPER:
+            return std::shared_ptr<Character>(new Soldier(type,team,health,ammo,range,power));
+            break;
+    }
 }
 

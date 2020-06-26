@@ -31,4 +31,14 @@ bool Sniper::legalMove(int distance) const {
     return distance <= STEPS_NUM;
 }
 
+Sniper::Sniper(CharacterType c_type, Team c_team, units_t c_health,
+        units_t c_ammo, units_t c_range, units_t c_power) {
+    team = c_team;
+    type = c_type;
+    health = c_health;
+    ammo = c_ammo;
+    range = c_range;
+    power = c_power;
+}
+
 

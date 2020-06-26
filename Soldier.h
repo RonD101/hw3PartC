@@ -11,13 +11,13 @@
 namespace mtm{
 class Soldier: public Character{
     static const char typeChar = 'S';
-    static const CharacterType type = SOLDIER;
 public:
-        std::shared_ptr<Character> clone() const override;
-        virtual int reload() const override ;
-        char getTypeChar() const override ;
-        CharacterType getType() const override ;
-        bool legalMove(int distance) const override ;
+    Soldier(CharacterType c_type,Team c_team, units_t c_health, units_t c_ammo, units_t c_range, units_t c_power);
+    std::shared_ptr<Character> clone() const override;
+    virtual int reload() const override ;
+    char getTypeChar() const override ;
+    CharacterType getType() const override ;
+    bool legalMove(int distance) const override ;
 };
 
 }

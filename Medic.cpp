@@ -25,3 +25,14 @@ mtm::CharacterType mtm::Medic::getType() const {
 bool mtm::Medic::legalMove(int distance) const {
     return distance <= STEPS_NUM;
 }
+
+mtm::Medic::Medic(mtm::CharacterType c_type, mtm::Team c_team, mtm::units_t c_health, mtm::units_t c_ammo,
+                  mtm::units_t c_range, mtm::units_t c_power) {
+        team = c_team;
+        type = c_type;
+        health = c_health;
+        ammo = c_ammo;
+        range = c_range;
+        power = c_power;
+
+}
