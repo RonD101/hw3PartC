@@ -6,6 +6,8 @@
 #include <memory>
 #include "Exception.h"
 
+#define SPACE ' '
+
 using std::shared_ptr;
 using namespace mtm;
 
@@ -51,7 +53,13 @@ std::ostream& mtm::operator<<(std::ostream &os, const Game game) {
     std::string board_symbol;
     for (int i = 0; i < game.board.height(); ++i) {
         for (int j = 0; j < game.board.width(); ++j) {
-            board_symbol += game.getCharacter(GridPoint(i,j))->getTypeChar();
+            if(game.getCharacter(GridPoint(i,j)) == nullptr)
+            {
+                board_symbol += SPACE;
+            }else
+            {
+                board_symbol += game.getCharacter(GridPoint(i,j))->getTypeChar();
+            }
         }
     }
     mtm::printGameBoard(os,board_symbol.c_str(),board_symbol.c_str()+board_symbol.length(),game.board.width());
