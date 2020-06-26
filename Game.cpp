@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "EmptySlot.h"
 #include <memory>
+#include "Exception.h"
 
 using std::shared_ptr;
 
@@ -15,7 +16,7 @@ void mtm::Game::reload(const mtm::GridPoint &coordinates) {
         character->addAmmo(character->reload());
     }catch (EmptySlot::EmptyCell&)
     {
-        throw Game::CellEmpty();
+        throw CellEmpty();
     }
 
 }
@@ -30,10 +31,12 @@ std::shared_ptr<mtm::Character> mtm::Game::getCharacter(const mtm::GridPoint& co
 
 }
 
-mtm::Game::Game(int height, int width) : board(Matrix<std::shared_ptr<Character>>
-          (Dimensions(height,width),std::shared_ptr<Character>(new EmptySlot()))){}
+mtm::Game::Game(int height, int width) : board((height <=0 || width <= 0) ? throw IllegalArgument() :
+    Matrix<std::shared_ptr<Character>>(Dimensions(height,width),
+            std::shared_ptr<Character>(new EmptySlot()))){}
 
-mtm::Game& mtm::Game::operator=(const mtm::Game &other) {
+mtm::Game& mtm::Game::operator=(const mtm::Game &other)
+{
     if(this == & other)
     {
         return *this;

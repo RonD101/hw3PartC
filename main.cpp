@@ -11,20 +11,20 @@ int main() {
     g2 = g;
     try {
         g.reload(GridPoint(0,0));
-    }catch (mtm::Game::Exception& e)
+    }catch (mtm::GameException& e)
     {
         cout << e.what() << endl;
     }
     try {
         g.reload(GridPoint(2,3));
-    }catch (mtm::Game::Exception& e)
+    }catch (mtm::GameException& e)
     {
         cout << e.what() << endl;
     }
     Game g3(g);
     try {
         Game g4(-2,-5);
-    }catch (mtm::Game::Exception& e)
+    }catch (mtm::GameException& e)
     {
         cout << e.what() << endl;
     }

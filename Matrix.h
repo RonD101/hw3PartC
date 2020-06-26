@@ -627,7 +627,7 @@ class Matrix<T>::IllegalInitialization  : public mtm::Exception {
     };
 
     template <class T>
-class Matrix<T>::DimensionMismatch  : public std::exception {
+class Matrix<T>::DimensionMismatch  : public mtm::Exception {
         Dimensions m1;
         Dimensions m2;
         std::string out;
