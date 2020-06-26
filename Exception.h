@@ -11,11 +11,11 @@ namespace mtm{
     class Exception : public std::exception{};
     class GameException : public Exception{};
 
-    class CellEmpty  : public mtm::GameException {
+    class IllegalArgument  : public mtm::GameException {
     public:
         const char* what() const noexcept override
         {
-            return "A game related error has occurred: CellEmpty";
+            return "A game related error has occurred: IllegalArgument";
         }
     };
     class IllegalCell  : public mtm::GameException {
@@ -25,11 +25,11 @@ namespace mtm{
             return "A game related error has occurred: IllegalCell";
         }
     };
-    class IllegalArgument  : public mtm::GameException {
+    class CellEmpty  : public mtm::GameException {
     public:
         const char* what() const noexcept override
         {
-            return "A game related error has occurred: IllegalArgument";
+            return "A game related error has occurred: CellEmpty";
         }
     };
     class MoveTooFar  : public mtm::GameException {
@@ -44,6 +44,27 @@ namespace mtm{
         const char* what() const noexcept override
         {
             return "A game related error has occurred: CellOccupied";
+        }
+    };
+    class OutOfRange  : public mtm::GameException {
+    public:
+        const char* what() const noexcept override
+        {
+            return "A game related error has occurred: OutOfRange";
+        }
+    };
+    class OutOfAmmo  : public mtm::GameException {
+    public:
+        const char* what() const noexcept override
+        {
+            return "A game related error has occurred: OutOfAmmo";
+        }
+    };
+    class IllegalTarget  : public mtm::GameException {
+    public:
+        const char* what() const noexcept override
+        {
+            return "A game related error has occurred: IllegalTarget";
         }
     };
 }
