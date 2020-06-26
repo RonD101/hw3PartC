@@ -16,7 +16,7 @@ namespace mtm{
         virtual int reload() const override;
         char getTypeChar() const override ;
         CharacterType getType() const override ;
-        bool legalMove(const GridPoint src, const GridPoint dst) const override ;
+        bool legalMove(int distance) const override ;
     };
 }
 #endif //HW3PARTC_MEDIC_H

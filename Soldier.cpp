@@ -3,7 +3,6 @@
 //
 
 #include "Soldier.h"
-#include "Game.h"
 
 #define AMMO_RELOAD 3
 #define STEPS_NUM 3
@@ -27,6 +26,6 @@ CharacterType Soldier::getType() const {
     return SOLDIER;
 }
 
-bool Soldier::legalMove(const GridPoint src, const GridPoint dst) const {
-    return Game::distance(src, dst) <= STEPS_NUM;
+bool Soldier::legalMove(int distance) const {
+    return distance <= STEPS_NUM;
 }

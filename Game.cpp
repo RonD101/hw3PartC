@@ -25,10 +25,18 @@ void mtm::Game::move(const mtm::GridPoint &src_coordinates, const mtm::GridPoint
     {
         throw CellEmpty();
     }
-    if(!getCharacter(dst_coordinates) && character->legalMove(src_coordinates, dst_coordinates))
+    if(!getCharacter(dst_coordinates))
     {
-        board(dst_coordinates.row,dst_coordinates.col) = board(src_coordinates.row,src_coordinates.col);
-        board(src_coordinates.row,src_coordinates.col) = nullptr;
+        int distance = abs(src_coordinates.row - dst_coordinates.row) +
+                       abs(src_coordinates.col - dst_coordinates.col);
+        if(character->legalMove(distance))
+        {
+            board(dst_coordinates.row,dst_coordinates.col) = board(src_coordinates.row,src_coordinates.col);
+            board(src_coordinates.row,src_coordinates.col) = nullptr;
+        } else
+        {
+            throw MoveTooFar();
+        }
 
     }else
     {

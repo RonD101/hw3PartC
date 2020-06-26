@@ -27,8 +27,8 @@ CharacterType Sniper::getType() const {
     return SNIPER;
 }
 
-bool Sniper::legalMove(const GridPoint src, const GridPoint dst) const {
-    return Game::distance(src, dst) <= STEPS_NUM;
+bool Sniper::legalMove(int distance) const {
+    return distance <= STEPS_NUM;
 }
 
 
