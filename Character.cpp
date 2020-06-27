@@ -4,12 +4,8 @@
 
 #include "Character.h"
 
-mtm::Character::~Character() {
-
-}
-
-void mtm::Character::addAmmo(int add_ammo) {
-    ammo += add_ammo;
+void mtm::Character::removeShot() {
+    ammo--;
 }
 
 void mtm::Character::addHealth(int value) {

@@ -9,8 +9,8 @@
 #define STEPS_NUM 5
 #define AMMO_PER_SHOT 1
 
-int mtm::Medic::reload() const {
-    return AMMO_RELOAD;
+void mtm::Medic::reload() {
+    ammo += AMMO_RELOAD;
 }
 
 std::shared_ptr<mtm::Character> mtm::Medic::clone() const {
@@ -18,7 +18,9 @@ std::shared_ptr<mtm::Character> mtm::Medic::clone() const {
 }
 
 char mtm::Medic::getTypeChar() const {
-    return typeChar;
+    if(team == PYTHON)
+        return typeCharPython;
+    return typeCharCpp;
 }
 
 mtm::CharacterType mtm::Medic::getType() const {
@@ -63,10 +65,11 @@ bool mtm::Medic::legalAttack(const mtm::GridPoint &src,
 
 void mtm::Medic::attack(const mtm::GridPoint &dst, bool same_team, std::vector<std::pair<GridPoint
         ,units_t >>& grids_to_attack, std::pair<int,int> board_size) {
-    units_t damage = -power;
-    if(same_team)
+    units_t damage = power;
+    if(!same_team)
     {
-        power *= -1;
+        this->removeShot();
+        damage *= -1;
     }
     grids_to_attack.push_back(std::pair<GridPoint,units_t >(dst,damage));
     return;

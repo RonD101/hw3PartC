@@ -20,10 +20,10 @@ namespace mtm{
         units_t power;
         CharacterType type;
     public:
-        virtual ~Character();
+        virtual ~Character() = default;
         virtual std::shared_ptr<Character> clone() const = 0;
-        void addAmmo(int add_ammo);
-        virtual int reload() const = 0;
+        void removeShot();
+        virtual void reload() = 0;
         virtual char getTypeChar() const= 0;
         virtual CharacterType getType() const= 0;
         virtual Team getTeam() const= 0;

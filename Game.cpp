@@ -20,7 +20,7 @@ void mtm::Game::reload(const mtm::GridPoint &coordinates) {
     {
         throw CellEmpty();
     }
-
+    character->reload();
 }
 
 /** move method moves one character in the src_coordinates param to dst_coordinates.
@@ -191,7 +191,7 @@ void Game::attack(const GridPoint &src_coordinates, const GridPoint &dst_coordin
         throw CellEmpty();
 
     }
-    shared_ptr<Character> dst_character = getCharacter(src_coordinates);
+    shared_ptr<Character> dst_character = getCharacter(dst_coordinates);
     bool dst_empty = false;
     bool same_team = false;
     if(dst_character == nullptr)

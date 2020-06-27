@@ -8,11 +8,18 @@
 #include <iostream>
 
 namespace mtm{
-    class Exception : public std::exception{};
-    class GameException : public Exception{};
+    class Exception : public std::exception{
+    public:
+        ~Exception() override = default;
+    };
+    class GameException : public Exception{
+    public:
+        ~GameException() override = default;
+    };
 
     class IllegalArgument  : public mtm::GameException {
     public:
+        ~IllegalArgument() override = default;
         const char* what() const noexcept override
         {
             return "A game related error has occurred: IllegalArgument";
@@ -20,6 +27,7 @@ namespace mtm{
     };
     class IllegalCell  : public mtm::GameException {
     public:
+        ~IllegalCell() override = default;
         const char* what() const noexcept override
         {
             return "A game related error has occurred: IllegalCell";
@@ -27,6 +35,7 @@ namespace mtm{
     };
     class CellEmpty  : public mtm::GameException {
     public:
+        ~CellEmpty() override = default;
         const char* what() const noexcept override
         {
             return "A game related error has occurred: CellEmpty";
@@ -34,6 +43,7 @@ namespace mtm{
     };
     class CellOccupied  : public mtm::GameException {
     public:
+        ~CellOccupied() override = default;
         const char* what() const noexcept override
         {
             return "A game related error has occurred: CellOccupied";
@@ -41,6 +51,7 @@ namespace mtm{
     };
     class MoveTooFar  : public mtm::GameException {
     public:
+        ~MoveTooFar() override = default;
         const char* what() const noexcept override
         {
             return "A game related error has occurred: MoveTooFar";
@@ -48,6 +59,7 @@ namespace mtm{
     };
     class OutOfRange  : public mtm::GameException {
     public:
+        ~OutOfRange() override = default;
         const char* what() const noexcept override
         {
             return "A game related error has occurred: OutOfRange";
@@ -55,6 +67,7 @@ namespace mtm{
     };
     class OutOfAmmo  : public mtm::GameException {
     public:
+        ~OutOfAmmo() override  = default;
         const char* what() const noexcept override
         {
             return "A game related error has occurred: OutOfAmmo";
@@ -62,6 +75,7 @@ namespace mtm{
     };
     class IllegalTarget  : public mtm::GameException {
     public:
+        ~IllegalTarget() override = default;
         const char* what() const noexcept override
         {
             return "A game related error has occurred: IllegalTarget";

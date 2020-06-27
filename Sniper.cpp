@@ -20,12 +20,14 @@ std::shared_ptr<Character> mtm::Sniper::clone() const {
     return shared_ptr<Character>(new Sniper(*this));
 }
 
-int mtm::Sniper::reload() const {
-    return AMMO_RELOAD;
+void mtm::Sniper::reload() {
+    ammo += AMMO_RELOAD;
 }
 
 char Sniper::getTypeChar() const {
-    return typeChar;
+    if(team == PYTHON)
+        return typeCharPython;
+    return typeCharCpp;
 }
 
 CharacterType Sniper::getType() const {
@@ -78,6 +80,7 @@ void Sniper::attack(const GridPoint &dst, bool same_team, std::vector<std::pair<
     }
     attack_count++;
     grids_to_attack.push_back(std::pair<GridPoint,units_t >(dst,damage));
+    this->removeShot();
     return;
 }
 
