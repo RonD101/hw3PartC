@@ -117,7 +117,7 @@ Game::makeCharacter(CharacterType type, Team team, units_t health, units_t ammo,
 
 bool Game::isOver(Team *winningTeam) const {
     bool board_check = false;
-    Team temp_team = static_cast<Team>(NULL);
+    Team temp_team = CPP;
     for (int i = 0; i < board.height(); ++i) {
         for (int j = 0; j < board.width(); ++j) {
             std::shared_ptr<Character> character = getCharacter(GridPoint(i, j));
