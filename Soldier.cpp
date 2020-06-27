@@ -18,7 +18,7 @@ std::shared_ptr<Character> mtm::Soldier::clone() const {
     return shared_ptr<Character>(new Soldier(*this));
 }
 
-// returns 3
+// returns 3 (ammo reload of soldier)
 void mtm::Soldier::reload() {
     ammo += AMMO_RELOAD;
 }
@@ -78,8 +78,10 @@ bool Soldier::legalAttack(const GridPoint &src, const GridPoint &dst,
     return true;
 }
 
-// function to calculate damage.
-// If there are enemies within a third of the range of the target, they will receive a third of the damage
+/** function to calculate damage.
+    If there are enemies within a third of the range of the target, they will receive a third of the damage
+    calls function removeShot from Character.h to reduce ammo by 1
+*/
 void Soldier::attack(const GridPoint &dst, bool same_team, std::vector<std::pair<GridPoint
         ,units_t >>& grids_to_attack, std::pair<int,int> board_size) {
     units_t damage = -power;

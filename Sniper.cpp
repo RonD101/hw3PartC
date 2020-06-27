@@ -20,7 +20,7 @@ std::shared_ptr<Character> mtm::Sniper::clone() const {
     return shared_ptr<Character>(new Sniper(*this));
 }
 
-// returns 2
+// returns 2 (ammo reload of sniper)
 void mtm::Sniper::reload() {
     ammo += AMMO_RELOAD;
 }
@@ -82,7 +82,9 @@ bool Sniper::legalAttack(const GridPoint &src, const GridPoint &dst,
     return true;
 }
 
-// function calculates damage done by an attack. every third attack damage is doubled
+/** function calculates damage done by an attack. every third attack damage is doubled
+    calls function removeShot from Character.h to reduce ammo by 1
+ */
 void Sniper::attack(const GridPoint &dst, bool same_team, std::vector<std::pair<GridPoint,
         units_t >>& grids_to_attack, std::pair<int,int> board_size) {
     units_t damage = -power;

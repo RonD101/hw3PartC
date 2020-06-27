@@ -9,7 +9,7 @@
 #define STEPS_NUM 5
 #define AMMO_PER_SHOT 1
 
-// returns 5
+// returns 5 (ammo reload of medic)
 void mtm::Medic::reload() {
     ammo += AMMO_RELOAD;
 }
@@ -74,8 +74,10 @@ bool mtm::Medic::legalAttack(const mtm::GridPoint &src,
     return true;
 }
 
-// function to calculate damage.
-// if target is on the same team as the attacker, the damage will be positive, ie healing them
+/** function to calculate damage.
+    if target is on the same team as the attacker, the damage will be positive, ie healing them
+    calls function removeShot from Character.h to reduce ammo by 1
+*/
 void mtm::Medic::attack(const mtm::GridPoint &dst, bool same_team, std::vector<std::pair<GridPoint
         ,units_t >>& grids_to_attack, std::pair<int,int> board_size) {
     units_t damage = power;
