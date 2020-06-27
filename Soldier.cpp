@@ -19,13 +19,15 @@ std::shared_ptr<Character> mtm::Soldier::clone() const {
 }
 
 // returns 3
-int mtm::Soldier::reload() const {
-    return AMMO_RELOAD;
+void mtm::Soldier::reload() {
+    ammo += AMMO_RELOAD;
 }
 
 // returns 'S' if in CPP team or 's' if in PYTHON team
 char Soldier::getTypeChar() const {
-    return typeChar;
+    if(team == PYTHON)
+        return typeCharPython;
+    return typeCharCpp;
 }
 
 // returns SOLDIER
@@ -91,6 +93,7 @@ void Soldier::attack(const GridPoint &dst, bool same_team, std::vector<std::pair
             }
         }
     }
+    this->removeShot();
     return ;
 }
 

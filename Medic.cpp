@@ -10,8 +10,8 @@
 #define AMMO_PER_SHOT 1
 
 // returns 5
-int mtm::Medic::reload() const {
-    return AMMO_RELOAD;
+void mtm::Medic::reload() {
+    ammo += AMMO_RELOAD;
 }
 
 std::shared_ptr<mtm::Character> mtm::Medic::clone() const {
@@ -20,7 +20,9 @@ std::shared_ptr<mtm::Character> mtm::Medic::clone() const {
 
 // returns 'M' if in CPP team or 'm' if in PYTHON team
 char mtm::Medic::getTypeChar() const {
-    return typeChar;
+    if(team == PYTHON)
+        return typeCharPython;
+    return typeCharCpp;
 }
 
 // returns MEDIC
@@ -76,10 +78,11 @@ bool mtm::Medic::legalAttack(const mtm::GridPoint &src,
 // if target is on the same team as the attacker, the damage will be positive, ie healing them
 void mtm::Medic::attack(const mtm::GridPoint &dst, bool same_team, std::vector<std::pair<GridPoint
         ,units_t >>& grids_to_attack, std::pair<int,int> board_size) {
-    units_t damage = -power;
-    if(same_team)
+    units_t damage = power;
+    if(!same_team)
     {
-        power *= -1;
+        this->removeShot();
+        damage *= -1;
     }
     grids_to_attack.push_back(std::pair<GridPoint,units_t >(dst,damage));
     return;
