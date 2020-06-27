@@ -19,6 +19,8 @@ public:
     CharacterType getType() const override ;
     Team getTeam() const override ;
     bool legalMove(int distance) const override ;
+    bool legalAttack(const GridPoint& src, const GridPoint& dst,int distance,
+            bool same_team, bool dst_empty) const override;
 };
 
 }

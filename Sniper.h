@@ -19,6 +19,8 @@ namespace mtm{
         char getTypeChar() const override ;
         CharacterType getType() const override ;
         Team getTeam() const override ;
+        bool legalAttack(const GridPoint& src, const GridPoint& dst,int distance,
+                bool same_team, bool dst_empty) const override;
     };
 }
 #endif //HW3PARTC_SNIPER_H

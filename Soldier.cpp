@@ -3,9 +3,11 @@
 //
 
 #include "Soldier.h"
+#include "Exception.h"
 
 #define AMMO_RELOAD 3
 #define STEPS_NUM 3
+#define AMMO_PER_SHOT 1
 
 using namespace mtm;
 using std::shared_ptr;
@@ -42,5 +44,22 @@ Soldier::Soldier(CharacterType c_type, Team c_team, units_t c_health, units_t c_
 
 Team Soldier::getTeam() const {
     return this->team;
+}
+
+bool Soldier::legalAttack(const GridPoint &src, const GridPoint &dst,
+        int distance,bool same_team, bool dst_empty) const {
+    if (distance > range)
+    {
+        throw OutOfRange();
+    }
+    if (ammo < AMMO_PER_SHOT)
+    {
+        throw OutOfAmmo();
+    }
+    if(src.row != dst.row && src.col != dst.col)
+    {
+        throw IllegalTarget();
+    }
+    return true;
 }
 

@@ -46,7 +46,7 @@ int main() {
     g.addCharacter(GridPoint(1,0),player2);
     g.addCharacter(GridPoint(2,0),player3);
     cout << g << endl;
-    g.move(GridPoint(0,0),GridPoint(2,0));
+    g.move(GridPoint(0,0),GridPoint(0,1));
     cout << g << endl;
     try {
         g.addCharacter(GridPoint(0,1),player1);
@@ -66,15 +66,17 @@ int main() {
     }catch (mtm::GameException& e){
         cout << e.what() << endl;
     }
+    cout << g << endl;
     g.move(GridPoint(1,0),GridPoint(0,0));
     cout << g << endl;
-    cout << player1->getTeam() << endl;
-
-    cout << g.isOver() << endl; // false
+    cout << player1->getTeam() << endl; // print 1
+    cout << g.isOver() << endl; // true
+    Team t;
     Game g4(4,4);
     cout << g4.isOver() << endl; // false
     g4.addCharacter(GridPoint(0,0),player1);
-    cout << g4.isOver() << endl; // true
+    cout << g4.isOver(&t) << endl; // true
+    cout << "win: " <<t << endl; // print 0
     g4.addCharacter(GridPoint(2,2),player4);
     cout << g4.isOver() << endl; // false
 

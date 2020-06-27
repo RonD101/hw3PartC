@@ -22,6 +22,7 @@ namespace mtm{
                                                         units_t health, units_t ammo, units_t range, units_t power);
         void reload(const GridPoint & coordinates);
         void move(const GridPoint &src_coordinates, const GridPoint &dst_coordinates);
+        void attack(const GridPoint & src_coordinates, const GridPoint & dst_coordinates);
         friend std::ostream& operator<<(std::ostream& os, const Game &game);
         bool isOver(Team* winningTeam = NULL) const;
     };

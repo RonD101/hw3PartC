@@ -139,8 +139,31 @@ bool Game::isOver(Team *winningTeam) const {
     } else{ // if only characters from one team were found, make their team the winner and return true
         if(winningTeam) // if winningTeam was not passed as null, update the winner
         {
-            winningTeam = &temp_team;
+            *winningTeam = temp_team;
         }
         return true;
     }
 }
+
+void Game::attack(const GridPoint &src_coordinates, const GridPoint &dst_coordinates) {
+    shared_ptr<Character> src_character = getCharacter(src_coordinates);
+    if(src_character == nullptr)
+    {
+        throw CellEmpty();
+
+    }
+    shared_ptr<Character> dst_character = getCharacter(src_coordinates);
+    bool dst_empty = false;
+    bool same_team = false;
+    if(dst_character == nullptr)
+    {
+        dst_empty = true;
+
+    }else if(src_character->getTeam() == dst_character->getTeam())
+    {
+        same_team = true;
+    }
+    src_character->legalAttack(src_coordinates,dst_coordinates,
+            distance(src_coordinates,dst_coordinates),same_team,dst_empty);
+}
+

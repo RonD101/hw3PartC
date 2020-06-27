@@ -4,9 +4,12 @@
 
 #include "Sniper.h"
 #include "Game.h"
+#include "Exception.h"
 
 #define AMMO_RELOAD 2
 #define STEPS_NUM 4
+#define AMMO_PER_SHOT 1
+#define DIVISOR 2
 
 using namespace mtm;
 using std::shared_ptr;
@@ -43,6 +46,25 @@ Sniper::Sniper(CharacterType c_type, Team c_team, units_t c_health,
 
 Team Sniper::getTeam() const {
     return this->team;
+}
+
+bool Sniper::legalAttack(const GridPoint &src, const GridPoint &dst,
+        int distance, bool same_team, bool dst_empty) const {
+    units_t half_range = static_cast<int>(std::ceil(double(range)/DIVISOR));
+    if (distance > range || distance < half_range)
+    {
+        throw OutOfRange();
+    }
+    if (ammo < AMMO_PER_SHOT)
+    {
+        throw OutOfAmmo();
+    }
+    if(same_team || dst_empty)
+    {
+        throw  IllegalTarget();
+    }
+
+    return true;
 }
 
 

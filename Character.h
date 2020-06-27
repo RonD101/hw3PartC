@@ -26,6 +26,8 @@ namespace mtm{
         virtual CharacterType getType() const= 0;
         virtual Team getTeam() const= 0;
         virtual bool legalMove(int distance) const = 0;
+        virtual bool legalAttack(const GridPoint& src, const GridPoint& dst,int distance,
+                bool same_team, bool dst_empty) const = 0;
     };
 }
 
