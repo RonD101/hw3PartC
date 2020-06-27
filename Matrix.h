@@ -7,7 +7,7 @@
 
 #include "TemArray.h"
 #include "Auxiliaries.h"
-#include "Exception.h"
+#include "Exceptions.h"
 namespace mtm {
     template<class T>
     class Matrix {
@@ -608,7 +608,7 @@ namespace mtm {
     ////////////////////////// Exception classes //////////////////////
     ///////////////////////////////////////////////////////////////////
     template <class T>
-    class Matrix<T>::AccessIllegalElement  : public mtm::Exception {
+    class Matrix<T>::AccessIllegalElement  : public mtm::Exceptions {
     public:
         const char* what() const noexcept override
         {
@@ -617,7 +617,7 @@ namespace mtm {
     };
 
     template <class T>
-class Matrix<T>::IllegalInitialization  : public mtm::Exception {
+class Matrix<T>::IllegalInitialization  : public mtm::Exceptions {
     public:
         const char* what() const noexcept override
         {
@@ -626,7 +626,7 @@ class Matrix<T>::IllegalInitialization  : public mtm::Exception {
     };
 
     template <class T>
-class Matrix<T>::DimensionMismatch  : public mtm::Exception {
+class Matrix<T>::DimensionMismatch  : public mtm::Exceptions {
         Dimensions m1;
         Dimensions m2;
         std::string out;

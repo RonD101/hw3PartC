@@ -3,7 +3,7 @@
 //
 
 #include "Medic.h"
-#include "Exception.h"
+#include "Exceptions.h"
 
 #define AMMO_RELOAD 5
 #define STEPS_NUM 5

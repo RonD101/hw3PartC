@@ -129,20 +129,27 @@ int main() {
     g5.reload(GridPoint(2,3));
     g5.attack(GridPoint(2,3),GridPoint(5,3));
     cout << g5 << endl;
-    std::shared_ptr<Character> soldierP2 = Game::makeCharacter(SOLDIER,PYTHON,3,4,4,3);
+    std::shared_ptr<Character> soldierP2 = Game::makeCharacter(SOLDIER,CPP,3,4,4,3);
     std::shared_ptr<Character> medicP2 = Game::makeCharacter(MEDIC,PYTHON,3,0,4,3);
     std::shared_ptr<Character> medicP3 = Game::makeCharacter(MEDIC,PYTHON,3,0,4,3);
     std::shared_ptr<Character> medicP4 = Game::makeCharacter(MEDIC,PYTHON,3,0,4,3);
     std::shared_ptr<Character> medicP5 = Game::makeCharacter(MEDIC,PYTHON,3,0,4,3);
     std::shared_ptr<Character> medicP6 = Game::makeCharacter(MEDIC,PYTHON,3,0,4,3);
     std::shared_ptr<Character> medicP7 = Game::makeCharacter(MEDIC,PYTHON,3,0,4,3);
+    std::shared_ptr<Character> medicP8 = Game::makeCharacter(MEDIC,PYTHON,3,0,4,3);
+    std::shared_ptr<Character> medicP9 = Game::makeCharacter(MEDIC,PYTHON,3,0,4,3);
     g5.addCharacter(GridPoint(5,2),soldierP2);
     g5.addCharacter(GridPoint(5,6),medicP2);
-//    g5.addCharacter(GridPoint(4,4),medicP3);
-//    g5.addCharacter(GridPoint(4,4),medicP4);
-//    g5.addCharacter(GridPoint(4,4),medicP5);
-//    g5.addCharacter(GridPoint(4,4),medicP6);
-//    g5.addCharacter(GridPoint(4,4),medicP7);
+    g5.addCharacter(GridPoint(4,5),medicP3);
+    g5.addCharacter(GridPoint(4,6),medicP4);
+    g5.addCharacter(GridPoint(5,7),medicP5);
+    g5.addCharacter(GridPoint(3,5),medicP6);
+    g5.addCharacter(GridPoint(3,7),medicP7);
+    g5.addCharacter(GridPoint(4,7),medicP7);
+    g5.addCharacter(GridPoint(3,6),medicP7);
+    cout << g5 << endl;
+    g5.attack(GridPoint(5,2),GridPoint(5,5));
+    g5.attack(GridPoint(5,2),GridPoint(5,5));
     cout << g5 << endl;
 
 

@@ -4,7 +4,7 @@
 
 #include "Sniper.h"
 #include "Game.h"
-#include "Exception.h"
+#include "Exceptions.h"
 
 #define AMMO_RELOAD 2
 #define STEPS_NUM 4
