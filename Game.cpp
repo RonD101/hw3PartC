@@ -207,7 +207,7 @@ void Game::attack(const GridPoint &src_coordinates, const GridPoint &dst_coordin
     std::vector<std::pair<GridPoint,units_t >> grids_to_attack;
     std::pair<int,int> board_size(board.height(),board.width());
     src_character->attack(dst_coordinates, same_team,grids_to_attack,board_size);
-    for (int i = 0; i < grids_to_attack.size(); ++i) {
+    for (int i = 0; i < static_cast<int>(grids_to_attack.size()); ++i) {
         std::shared_ptr<Character> temp_character = getCharacter(grids_to_attack[i].first);
         if(temp_character != nullptr)
         {
