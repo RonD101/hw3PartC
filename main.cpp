@@ -35,6 +35,7 @@ int main() {
     std::shared_ptr<Character> player1 = Game::makeCharacter(SNIPER,CPP,3,4,4,3);
     std::shared_ptr<Character> player2 = Game::makeCharacter(SOLDIER,CPP,3,4,4,3);
     std::shared_ptr<Character> player3 = Game::makeCharacter(MEDIC,CPP,3,4,4,3);
+    std::shared_ptr<Character> player4 = Game::makeCharacter(MEDIC,PYTHON,3,4,4,3);
     try {
         g.addCharacter(GridPoint(-2,0), player1);
 
@@ -68,5 +69,15 @@ int main() {
     g.move(GridPoint(1,0),GridPoint(0,0));
     cout << g << endl;
     cout << player1->getTeam() << endl;
+
+    cout << g.isOver() << endl; // false
+    Game g4(4,4);
+    cout << g4.isOver() << endl; // false
+    g4.addCharacter(GridPoint(0,0),player1);
+    cout << g4.isOver() << endl; // true
+    g4.addCharacter(GridPoint(2,2),player4);
+    cout << g4.isOver() << endl; // false
+
+
     return 0;
 }

@@ -116,28 +116,31 @@ Game::makeCharacter(CharacterType type, Team team, units_t health, units_t ammo,
 }
 
 bool Game::isOver(Team *winningTeam) const {
-    std::string board_symbol;
     bool board_check = false;
     Team temp_team = static_cast<Team>(NULL);
-    for (int i = 0; i < this->board.height(); ++i) {
-        for (int j = 0; j < this->board.width(); ++j) {
-            std::shared_ptr<Character> character = getCharacter(GridPoint(i,j));
-            if(character != nullptr)
-            {
-                if(!board_check)
-                {
+    for (int i = 0; i < board.height(); ++i) {
+        for (int j = 0; j < board.width(); ++j) {
+            std::shared_ptr<Character> character = getCharacter(GridPoint(i, j));
+            if (character != nullptr) {
+                if (!board_check) {
                     temp_team = character->getTeam();
-                } else if (temp_team != character->getTeam())
-                {
-
+                } // if characters from more than one team were found, return false
+                if (temp_team != character->getTeam()) {
+                    return false;
                 }
                 board_check = true;
-            }else
-            {
-                board_symbol += this->getCharacter(GridPoint(i,j))->getTypeChar();
             }
         }
     }
-    return false;
+    // if no character belonging to any team was found, return false
+    if(!board_check)
+    {
+        return false;
+    } else{ // if only characters from one team were found, make their team the winner and return true
+        if(winningTeam) // if winningTeam was not passed as null, update the winner
+        {
+            winningTeam = &temp_team;
+        }
+        return true;
+    }
 }
-
