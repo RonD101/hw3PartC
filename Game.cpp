@@ -86,6 +86,8 @@ int Game::distance(const GridPoint &src_coordinates, const GridPoint &dst_coordi
         abs(src_coordinates.col - dst_coordinates.col);
 }
 
+// Output function uses printGameBoard to print onto the screen the game board. In an emty cell, ' ' is printed.
+// In an empty cell, ' ' is printed. In an occupied cell prints the character corresponding  to the character in it.
 std::ostream& mtm::operator<<(std::ostream &os, const Game &game) {
     std::string board_symbol;
     for (int i = 0; i < game.board.height(); ++i) {
@@ -171,6 +173,17 @@ bool Game::isOver(Team *winningTeam) const {
     }
 }
 
+/** attack method makes character in src_coordinates attack character in dst_coordinates
+    if src_coordinates is empty, throws exception CellEmpty.
+    if src_coordinates or dst_character are empty, getCharacter function throws exception IllegalCell
+    if dst_character is out of range of the attacker, legalAttack function throws exception OutOfRange
+    if character in src_coordinates dosn't have enough ammo to attack, legalAttack function throws exception OutOfAmmo
+    legalAttack function throws exception IllegalTarget if:
+        medic tries to attack itself or an empty cell
+        sniper tries to attack a teammate or an empty cell
+        soldier tries to attack a cell not in its row or column
+    in the end of successful attack, calls function clearDeads
+ */
 void Game::attack(const GridPoint &src_coordinates, const GridPoint &dst_coordinates) {
     shared_ptr<Character> src_character = getCharacter(src_coordinates);
     if(src_character == nullptr)
@@ -189,11 +202,11 @@ void Game::attack(const GridPoint &src_coordinates, const GridPoint &dst_coordin
     {
         same_team = true;
     }
-    src_character->legalAttack(src_coordinates,dst_coordinates,
-            distance(src_coordinates,dst_coordinates),same_team,dst_empty);
+    src_character->legalAttack(src_coordinates, dst_coordinates,
+            distance(src_coordinates, dst_coordinates), same_team, dst_empty);
     std::vector<std::pair<GridPoint,units_t >> grids_to_attack;
     std::pair<int,int> board_size(board.height(),board.width());
-    src_character->attack(dst_coordinates,same_team,grids_to_attack,board_size);
+    src_character->attack(dst_coordinates, same_team,grids_to_attack,board_size);
     for (int i = 0; i < grids_to_attack.size(); ++i) {
         std::shared_ptr<Character> temp_character = getCharacter(grids_to_attack[i].first);
         if(temp_character != nullptr)
@@ -213,6 +226,7 @@ void Game::attack(const GridPoint &src_coordinates, const GridPoint &dst_coordin
     this->clearDeads();
 }
 
+// function sets all non-empty cells on board with health <= 0 to nullptr
 void Game::clearDeads() {
     for (Matrix<shared_ptr<Character>>::iterator it = board.begin(); it != board.end(); ++it) {
         if(*it != nullptr && (*it)->getHealth() <= 0)
