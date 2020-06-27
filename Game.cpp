@@ -13,6 +13,11 @@
 using std::shared_ptr;
 using namespace mtm;
 
+// constructor for Game. creates an empty board with given height and witdth.
+// If one of the params is <= 0, throws exception IllegalArgument
+mtm::Game::Game(int height, int width) : board((height <=0 || width <= 0) ? throw IllegalArgument() :
+               Matrix<std::shared_ptr<Character>>(Dimensions(height,width), nullptr)){}
+
 // reload method adds ammo to character in the coordinates passed
 void mtm::Game::reload(const mtm::GridPoint &coordinates) {
     shared_ptr<Character> character = getCharacter(coordinates);
@@ -20,7 +25,7 @@ void mtm::Game::reload(const mtm::GridPoint &coordinates) {
     {
         throw CellEmpty();
     }
-
+    character->reload();
 }
 
 /** move method moves one character in the src_coordinates param to dst_coordinates.
@@ -63,11 +68,6 @@ std::shared_ptr<mtm::Character> mtm::Game::getCharacter(const mtm::GridPoint& co
     }
 
 }
-
-// constructor for Game. creates an empty board with given height and witdth.
-// If one of the params is <= 0, throws exception IllegalArgument
-mtm::Game::Game(int height, int width) : board((height <=0 || width <= 0) ? throw IllegalArgument() :
-    Matrix<std::shared_ptr<Character>>(Dimensions(height,width), nullptr)){}
 
 // operator= for game
 mtm::Game& mtm::Game::operator=(const mtm::Game &other)

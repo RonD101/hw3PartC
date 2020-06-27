@@ -18,22 +18,27 @@ std::shared_ptr<Character> mtm::Soldier::clone() const {
     return shared_ptr<Character>(new Soldier(*this));
 }
 
+// returns 3
 int mtm::Soldier::reload() const {
     return AMMO_RELOAD;
 }
 
+// returns 'S' if in CPP team or 's' if in PYTHON team
 char Soldier::getTypeChar() const {
     return typeChar;
 }
 
+// returns SOLDIER
 CharacterType Soldier::getType() const {
     return SOLDIER;
 }
 
+// function checks if distance param is smaller than STEPS_NUM
 bool Soldier::legalMove(int distance) const {
     return distance <= STEPS_NUM;
 }
 
+// constructor
 Soldier::Soldier(CharacterType c_type, Team c_team, units_t c_health, units_t c_ammo,
             units_t c_range, units_t c_power) {
     team = c_team;
@@ -44,10 +49,16 @@ Soldier::Soldier(CharacterType c_type, Team c_team, units_t c_health, units_t c_
     power = c_power;
 }
 
+// returns the team this character belongs to
 Team Soldier::getTeam() const {
     return this->team;
 }
 
+/** function returns true if character in src can attack character in dst and no exception was thrown
+    if target is out of character's range, throws exception OutOfRange
+    if character's out of ammo throws exception OutOfAmmo
+    if target is not on the same row or column as the attacker, throws exception IllegalTarget
+ */
 bool Soldier::legalAttack(const GridPoint &src, const GridPoint &dst,
         int distance,bool same_team, bool dst_empty) const {
     if (distance > range)
@@ -65,6 +76,8 @@ bool Soldier::legalAttack(const GridPoint &src, const GridPoint &dst,
     return true;
 }
 
+// function to calculate damage.
+// If there are enemies within a third of the range of the target, they will receive a third of the damage
 void Soldier::attack(const GridPoint &dst, bool same_team, std::vector<std::pair<GridPoint
         ,units_t >>& grids_to_attack, std::pair<int,int> board_size) {
     units_t damage = -power;
@@ -81,6 +94,7 @@ void Soldier::attack(const GridPoint &dst, bool same_team, std::vector<std::pair
     return ;
 }
 
+// function to measure distance between 2 sets of coordinates using the formula: |x1-x2| + |y1-y2|
 int Soldier::distance(const GridPoint &src_coordinates, const GridPoint &dst_coordinates) {
     return abs(src_coordinates.row - dst_coordinates.row) +
            abs(src_coordinates.col - dst_coordinates.col);

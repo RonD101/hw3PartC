@@ -9,6 +9,7 @@
 #define STEPS_NUM 5
 #define AMMO_PER_SHOT 1
 
+// returns 5
 int mtm::Medic::reload() const {
     return AMMO_RELOAD;
 }
@@ -17,18 +18,22 @@ std::shared_ptr<mtm::Character> mtm::Medic::clone() const {
     return std::shared_ptr<Character>(new Medic(*this));
 }
 
+// returns 'M' if in CPP team or 'm' if in PYTHON team
 char mtm::Medic::getTypeChar() const {
     return typeChar;
 }
 
+// returns MEDIC
 mtm::CharacterType mtm::Medic::getType() const {
     return MEDIC;
 }
 
+// function checks if distance param is smaller than STEPS_NUM
 bool mtm::Medic::legalMove(int distance) const {
     return distance <= STEPS_NUM;
 }
 
+// constructor
 mtm::Medic::Medic(mtm::CharacterType c_type, mtm::Team c_team, mtm::units_t c_health, mtm::units_t c_ammo,
                   mtm::units_t c_range, mtm::units_t c_power) {
         team = c_team;
@@ -40,10 +45,16 @@ mtm::Medic::Medic(mtm::CharacterType c_type, mtm::Team c_team, mtm::units_t c_he
 
 }
 
+// returns the team this character belongs to
 mtm::Team mtm::Medic::getTeam() const {
     return this->team;
 }
 
+/** function returns true if character in src can attack character in dst and no exception was thrown
+    if target is out of character's range, throws exception OutOfRange
+    if character's out of ammo and target is on different team, throws exception OutOfAmmo
+    if dst is empty or character tries to attack itself, throws exception IllegalTarget
+ */
 bool mtm::Medic::legalAttack(const mtm::GridPoint &src,
         const mtm::GridPoint &dst, int distance,bool same_team, bool dst_empty) const {
     if (distance > range)
@@ -61,6 +72,8 @@ bool mtm::Medic::legalAttack(const mtm::GridPoint &src,
     return true;
 }
 
+// function to calculate damage.
+// if target is on the same team as the attacker, the damage will be positive, ie healing them
 void mtm::Medic::attack(const mtm::GridPoint &dst, bool same_team, std::vector<std::pair<GridPoint
         ,units_t >>& grids_to_attack, std::pair<int,int> board_size) {
     units_t damage = -power;
