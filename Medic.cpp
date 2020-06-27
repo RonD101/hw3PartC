@@ -60,3 +60,14 @@ bool mtm::Medic::legalAttack(const mtm::GridPoint &src,
     }
     return true;
 }
+
+void mtm::Medic::attack(const mtm::GridPoint &dst, bool same_team, std::vector<std::pair<GridPoint
+        ,units_t >>& grids_to_attack, std::pair<int,int> board_size) {
+    units_t damage = -power;
+    if(same_team)
+    {
+        power *= -1;
+    }
+    grids_to_attack.push_back(std::pair<GridPoint,units_t >(dst,damage));
+    return;
+}

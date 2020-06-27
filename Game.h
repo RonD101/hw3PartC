@@ -13,6 +13,7 @@ namespace mtm{
         Matrix<std::shared_ptr<Character>> board;
         std::shared_ptr<Character> getCharacter(const GridPoint& coordinates) const;
         static int distance(const GridPoint &src_coordinates, const GridPoint &dst_coordinates);
+        void clearDeads();
     public:
         Game(int height, int width);
         Game(const Game& game):board(game.board){}

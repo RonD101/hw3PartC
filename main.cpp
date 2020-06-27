@@ -33,7 +33,7 @@ int main() {
     }
     cout << g << endl;
     std::shared_ptr<Character> player1 = Game::makeCharacter(SNIPER,CPP,3,4,4,3);
-    std::shared_ptr<Character> player2 = Game::makeCharacter(SOLDIER,CPP,3,4,4,3);
+    std::shared_ptr<Character> player2 = Game::makeCharacter(SOLDIER,PYTHON,3,4,4,3);
     std::shared_ptr<Character> player3 = Game::makeCharacter(MEDIC,CPP,3,4,4,3);
     std::shared_ptr<Character> player4 = Game::makeCharacter(MEDIC,PYTHON,3,4,4,3);
     try {
@@ -79,7 +79,7 @@ int main() {
     cout << "win: " <<t << endl; // print 0
     g4.addCharacter(GridPoint(2,2),player4);
     cout << g4.isOver() << endl; // false
-
-
+    g.attack(GridPoint(0,0),GridPoint(0,1));
+    cout << g << endl;
     return 0;
 }

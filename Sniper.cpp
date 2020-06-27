@@ -10,6 +10,8 @@
 #define STEPS_NUM 4
 #define AMMO_PER_SHOT 1
 #define DIVISOR 2
+#define THIRD_ATTACK 3
+#define DOUBLE_DAMAGE 2
 
 using namespace mtm;
 using std::shared_ptr;
@@ -66,5 +68,18 @@ bool Sniper::legalAttack(const GridPoint &src, const GridPoint &dst,
 
     return true;
 }
+
+void Sniper::attack(const GridPoint &dst, bool same_team, std::vector<std::pair<GridPoint,
+        units_t >>& grids_to_attack, std::pair<int,int> board_size) {
+    units_t damage = -power;
+    if(attack_count%THIRD_ATTACK == 0)
+    {
+        damage *= DOUBLE_DAMAGE;
+    }
+    attack_count++;
+    grids_to_attack.push_back(std::pair<GridPoint,units_t >(dst,damage));
+    return;
+}
+
 
 

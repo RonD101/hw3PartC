@@ -11,3 +11,11 @@ mtm::Character::~Character() {
 void mtm::Character::addAmmo(int add_ammo) {
     ammo += add_ammo;
 }
+
+void mtm::Character::addHealth(int value) {
+    health += value;
+}
+
+int mtm::Character::getHealth() {
+    return health;
+}

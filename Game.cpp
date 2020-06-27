@@ -1,9 +1,9 @@
 //
 // Created by Ron Dahan on 22/06/2020.
 //
-
 #include "Game.h"
 #include <memory>
+#include <vector>
 #include "Soldier.h"
 #include "Medic.h"
 #include "Sniper.h"
@@ -191,4 +191,33 @@ void Game::attack(const GridPoint &src_coordinates, const GridPoint &dst_coordin
     }
     src_character->legalAttack(src_coordinates,dst_coordinates,
             distance(src_coordinates,dst_coordinates),same_team,dst_empty);
+    std::vector<std::pair<GridPoint,units_t >> grids_to_attack;
+    std::pair<int,int> board_size(board.height(),board.width());
+    src_character->attack(dst_coordinates,same_team,grids_to_attack,board_size);
+    for (int i = 0; i < grids_to_attack.size(); ++i) {
+        std::shared_ptr<Character> temp_character = getCharacter(grids_to_attack[i].first);
+        if(temp_character != nullptr)
+        {
+            //healing a character
+            if(src_character->getTeam() == temp_character->getTeam() && grids_to_attack[i].second > 0)
+            {
+                temp_character->addHealth(grids_to_attack[i].second);
+            }
+            //damaging opponent
+            else if(src_character->getTeam() != temp_character->getTeam())
+            {
+                temp_character->addHealth(grids_to_attack[i].second);
+            }
+        }
+    }
+    this->clearDeads();
+}
+
+void Game::clearDeads() {
+    for (Matrix<shared_ptr<Character>>::iterator it = board.begin(); it != board.end(); ++it) {
+        if(*it != nullptr && (*it)->getHealth() <= 0)
+        {
+            *it = nullptr;
+        }
+    }
 }

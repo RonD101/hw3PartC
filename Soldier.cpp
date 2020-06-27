@@ -8,6 +8,8 @@
 #define AMMO_RELOAD 3
 #define STEPS_NUM 3
 #define AMMO_PER_SHOT 1
+#define DIVISOR 3
+#define HALF 2
 
 using namespace mtm;
 using std::shared_ptr;
@@ -62,4 +64,26 @@ bool Soldier::legalAttack(const GridPoint &src, const GridPoint &dst,
     }
     return true;
 }
+
+void Soldier::attack(const GridPoint &dst, bool same_team, std::vector<std::pair<GridPoint
+        ,units_t >>& grids_to_attack, std::pair<int,int> board_size) {
+    units_t damage = -power;
+    units_t third_range = static_cast<int>(std::ceil(double(range)/DIVISOR));
+    for (int i = 0; i < board_size.first; ++i) {
+        for (int j = 0; j < board_size.second; ++j) {
+            GridPoint tmp(i,j);
+            if(Soldier::distance(dst,tmp) < third_range)
+            {
+                grids_to_attack.push_back(std::pair<GridPoint,units_t >(tmp,(tmp == dst)? damage : damage/HALF));
+            }
+        }
+    }
+    return ;
+}
+
+int Soldier::distance(const GridPoint &src_coordinates, const GridPoint &dst_coordinates) {
+    return abs(src_coordinates.row - dst_coordinates.row) +
+           abs(src_coordinates.col - dst_coordinates.col);
+}
+
 

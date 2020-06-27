@@ -21,6 +21,8 @@ namespace mtm{
         bool legalMove(int distance) const override ;
         bool legalAttack(const GridPoint& src, const GridPoint& dst,int distance,
                 bool same_team, bool dst_empty) const override;
+        void attack(const GridPoint& dst, bool same_team, std::vector<std::pair<GridPoint
+                ,units_t >>& grids_to_attack, std::pair<int,int> board_size) override;
     };
 }
 #endif //HW3PARTC_MEDIC_H
