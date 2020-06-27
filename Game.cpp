@@ -13,18 +13,24 @@
 using std::shared_ptr;
 using namespace mtm;
 
+// reload method adds ammo to character in the coordinates passed
 void mtm::Game::reload(const mtm::GridPoint &coordinates) {
     shared_ptr<Character> character = getCharacter(coordinates);
-    if(character == nullptr)
+    if(character == nullptr) //if reload was attempted on an empty space in the board, throw CellEmpty exception
     {
         throw CellEmpty();
     }
 
 }
 
+/** move method moves one character in the src_coordinates param to dst_coordinates.
+     if the source coordinates are empty, throw exception CellEmpty
+     function legalMove returns false if destination is to far. Exception MoveTooFar is thrown
+     if the destination is occupied, throws exception CellOccupied
+*/
 void mtm::Game::move(const mtm::GridPoint &src_coordinates, const mtm::GridPoint &dst_coordinates) {
     shared_ptr<Character> character = getCharacter(src_coordinates);
-    if(character == nullptr) // if the source coordinates are empty, throw exception
+    if(character == nullptr)
     {
         throw CellEmpty();
     }
@@ -46,6 +52,8 @@ void mtm::Game::move(const mtm::GridPoint &src_coordinates, const mtm::GridPoint
     }
 }
 
+// function tries to return the content of the board at the coordinates passed.
+// if the coordinates are outside the board, throws exception IllegalCell
 std::shared_ptr<mtm::Character> mtm::Game::getCharacter(const mtm::GridPoint& coordinates) const{
     try {
         return board(coordinates.row,coordinates.col);
@@ -56,9 +64,12 @@ std::shared_ptr<mtm::Character> mtm::Game::getCharacter(const mtm::GridPoint& co
 
 }
 
+// constructor for Game. creates an empty board with given height and witdth.
+// If one of the params is <= 0, throws exception IllegalArgument
 mtm::Game::Game(int height, int width) : board((height <=0 || width <= 0) ? throw IllegalArgument() :
     Matrix<std::shared_ptr<Character>>(Dimensions(height,width), nullptr)){}
 
+// operator= for game
 mtm::Game& mtm::Game::operator=(const mtm::Game &other)
 {
     if(this == & other)
@@ -69,6 +80,7 @@ mtm::Game& mtm::Game::operator=(const mtm::Game &other)
     return *this;
 }
 
+// function to measure distance between 2 sets of coordinates using the formula: |x1-x2| + |y1-y2|
 int Game::distance(const GridPoint &src_coordinates, const GridPoint &dst_coordinates) {
     return abs(src_coordinates.row - dst_coordinates.row) +
         abs(src_coordinates.col - dst_coordinates.col);
@@ -91,6 +103,10 @@ std::ostream& mtm::operator<<(std::ostream &os, const Game &game) {
     return os;
 }
 
+/** function adds an existing character to the game at the coordinates passed.
+    if the coordinates are out of range, getCharacter throws exception IllegalCell
+    if the the coordinates are occupied, function throws exception CellOccupied
+*/
 void Game::addCharacter(const GridPoint &coordinates, std::shared_ptr<Character> character) {
     if(getCharacter(coordinates) != nullptr)
     {
@@ -99,8 +115,13 @@ void Game::addCharacter(const GridPoint &coordinates, std::shared_ptr<Character>
     board(coordinates.row,coordinates.col) = character;
 }
 
+// creates a new character with params passed. If health param is 0 or lower, throws exception IllegalArgument
 std::shared_ptr<Character>
 Game::makeCharacter(CharacterType type, Team team, units_t health, units_t ammo, units_t range, units_t power) {
+    if( health <= 0)
+    {
+        throw IllegalArgument();
+    }
     switch (type){
         case SOLDIER:
             return std::shared_ptr<Character>(new Soldier(type,team,health,ammo,range,power));
@@ -115,20 +136,25 @@ Game::makeCharacter(CharacterType type, Team team, units_t health, units_t ammo,
     return nullptr;
 }
 
+/** function to check if currently there is a winning team
+if a nullptr is passed return if there is a winning team, but doesn't update winningTeam param
+if a non null arg was passed, also return if there is a winning team. if there is, update winningTeam param */
 bool Game::isOver(Team *winningTeam) const {
     bool board_check = false;
     Team temp_team = CPP;
     for (int i = 0; i < board.height(); ++i) {
         for (int j = 0; j < board.width(); ++j) {
             std::shared_ptr<Character> character = getCharacter(GridPoint(i, j));
-            if (character != nullptr) {
-                if (!board_check) {
+            if (character != nullptr) // first non-empty space on the board
+            {
+                if (!board_check)
+                { //if found a character, save his team into a temporary var to later return as winner
                     temp_team = character->getTeam();
                 } // if characters from more than one team were found, return false
                 if (temp_team != character->getTeam()) {
                     return false;
                 }
-                board_check = true;
+                board_check = true; // if a single character was found, set board_check to false
             }
         }
     }
@@ -166,4 +192,3 @@ void Game::attack(const GridPoint &src_coordinates, const GridPoint &dst_coordin
     src_character->legalAttack(src_coordinates,dst_coordinates,
             distance(src_coordinates,dst_coordinates),same_team,dst_empty);
 }
-
