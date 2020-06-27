@@ -3,7 +3,7 @@
 //
 
 #include "Soldier.h"
-#include "Exception.h"
+#include "Exceptions.h"
 
 #define AMMO_RELOAD 3
 #define STEPS_NUM 3
@@ -89,9 +89,10 @@ void Soldier::attack(const GridPoint &dst, bool same_team, std::vector<std::pair
     for (int i = 0; i < board_size.first; ++i) {
         for (int j = 0; j < board_size.second; ++j) {
             GridPoint tmp(i,j);
-            if(Soldier::distance(dst,tmp) < third_range)
+            if(Soldier::distance(dst,tmp) <= third_range)
             {
-                grids_to_attack.push_back(std::pair<GridPoint,units_t >(tmp,(tmp == dst)? damage : damage/HALF));
+                grids_to_attack.push_back(std::pair<GridPoint,units_t >(tmp,
+                        (tmp == dst)? damage : static_cast<int>(std::floor(double(damage)/HALF))));
             }
         }
     }

@@ -2,17 +2,17 @@
 // Created by Ron Dahan on 26/06/2020.
 //
 
-#ifndef HW3PARTC_EXCEPTION_H
-#define HW3PARTC_EXCEPTION_H
+#ifndef HW3PARTC_EXCEPTIONS_H
+#define HW3PARTC_EXCEPTIONS_H
 
 #include <iostream>
 
 namespace mtm{
-    class Exception : public std::exception{
+    class Exceptions : public std::exception{
     public:
-        ~Exception() override = default;
+        ~Exceptions() override = default;
     };
-    class GameException : public Exception{
+    class GameException : public Exceptions{
     public:
         ~GameException() override = default;
     };
@@ -83,4 +83,4 @@ namespace mtm{
     };
 }
 
-#endif //HW3PARTC_EXCEPTION_H
+#endif //HW3PARTC_EXCEPTIONS_H
