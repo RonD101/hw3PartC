@@ -40,7 +40,7 @@ Soldier::Soldier(CharacterType c_type, Team c_team, units_t c_health, units_t c_
     power = c_power;
 }
 
-char Soldier::getTeam() const {
+Team Soldier::getTeam() const {
     return this->team;
 }
 

@@ -37,6 +37,6 @@ mtm::Medic::Medic(mtm::CharacterType c_type, mtm::Team c_team, mtm::units_t c_he
 
 }
 
-char mtm::Medic::getTeam() const {
+mtm::Team mtm::Medic::getTeam() const {
     return this->team;
 }

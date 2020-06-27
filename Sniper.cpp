@@ -41,7 +41,7 @@ Sniper::Sniper(CharacterType c_type, Team c_team, units_t c_health,
     power = c_power;
 }
 
-char Sniper::getTeam() const {
+Team Sniper::getTeam() const {
     return this->team;
 }
 

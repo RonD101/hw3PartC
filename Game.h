@@ -23,6 +23,7 @@ namespace mtm{
         void reload(const GridPoint & coordinates);
         void move(const GridPoint &src_coordinates, const GridPoint &dst_coordinates);
         friend std::ostream& operator<<(std::ostream& os, const Game &game);
+        bool isOver(Team* winningTeam = NULL) const;
     };
     std::ostream& operator<<(std::ostream& os, const Game &game);
 }

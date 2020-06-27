@@ -30,8 +30,7 @@ void mtm::Game::move(const mtm::GridPoint &src_coordinates, const mtm::GridPoint
     }
     if(!getCharacter(dst_coordinates))
     {
-        int distance = abs(src_coordinates.row - dst_coordinates.row) +
-                       abs(src_coordinates.col - dst_coordinates.col);
+        int distance = Game::distance(src_coordinates, dst_coordinates);
         if(character->legalMove(distance))
         {
             board(dst_coordinates.row,dst_coordinates.col) = board(src_coordinates.row,src_coordinates.col);
@@ -114,5 +113,31 @@ Game::makeCharacter(CharacterType type, Team team, units_t health, units_t ammo,
             break;
     }
     return nullptr;
+}
+
+bool Game::isOver(Team *winningTeam) const {
+    std::string board_symbol;
+    bool board_check = false;
+    Team temp_team = static_cast<Team>(NULL);
+    for (int i = 0; i < this->board.height(); ++i) {
+        for (int j = 0; j < this->board.width(); ++j) {
+            std::shared_ptr<Character> character = getCharacter(GridPoint(i,j));
+            if(character != nullptr)
+            {
+                if(!board_check)
+                {
+                    temp_team = character->getTeam();
+                } else if (temp_team != character->getTeam())
+                {
+
+                }
+                board_check = true;
+            }else
+            {
+                board_symbol += this->getCharacter(GridPoint(i,j))->getTypeChar();
+            }
+        }
+    }
+    return false;
 }
 

@@ -18,7 +18,7 @@ namespace mtm{
         bool legalMove(int distance) const override ;
         char getTypeChar() const override ;
         CharacterType getType() const override ;
-        char getTeam() const override ;
+        Team getTeam() const override ;
     };
 }
 #endif //HW3PARTC_SNIPER_H

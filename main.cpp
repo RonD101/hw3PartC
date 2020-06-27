@@ -45,7 +45,7 @@ int main() {
     g.addCharacter(GridPoint(1,0),player2);
     g.addCharacter(GridPoint(2,0),player3);
     cout << g << endl;
-    g.move(GridPoint(0,0),GridPoint(0,1));
+    g.move(GridPoint(0,0),GridPoint(2,0));
     cout << g << endl;
     try {
         g.addCharacter(GridPoint(0,1),player1);
@@ -54,7 +54,7 @@ int main() {
         cout << e.what() << endl;
     }
     try {
-        g.move(GridPoint(1,0),GridPoint(0,-1));
+        g.move(GridPoint(1,0),GridPoint(0,1));
 
     }catch (mtm::GameException& e){
         cout << e.what() << endl;
@@ -67,5 +67,6 @@ int main() {
     }
     g.move(GridPoint(1,0),GridPoint(0,0));
     cout << g << endl;
+    cout << player1->getTeam() << endl;
     return 0;
 }
