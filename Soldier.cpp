@@ -79,7 +79,7 @@ bool Soldier::legalAttack(const GridPoint &src, const GridPoint &dst,
 }
 
 /** function to calculate damage.
-    If there are enemies within a third of the range of the target, they will receive a third of the damage
+    If there are enemies within a third of the range of the target, they will receive half of the damage
     calls function removeShot from Character.h to reduce ammo by 1
 */
 void Soldier::attack(const GridPoint &dst, bool same_team, std::vector<std::pair<GridPoint
