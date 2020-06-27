@@ -30,11 +30,6 @@ char Soldier::getTypeChar() const {
     return typeCharCpp;
 }
 
-// returns SOLDIER
-CharacterType Soldier::getType() const {
-    return SOLDIER;
-}
-
 // function checks if distance param is smaller than STEPS_NUM
 bool Soldier::legalMove(int distance) const {
     return distance <= STEPS_NUM;

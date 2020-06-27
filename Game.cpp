@@ -18,6 +18,20 @@ using namespace mtm;
 mtm::Game::Game(int height, int width) : board((height <=0 || width <= 0) ? throw IllegalArgument() :
                Matrix<std::shared_ptr<Character>>(Dimensions(height,width), nullptr)){}
 
+Game::Game(const Game &game): board(game.board){
+    //making sure the games are separated
+    for (int i = 0; i < board.height() ; ++i)
+    {
+        for (int j = 0; j < board.width(); ++j)
+        {
+            if(game.board(i,j) != nullptr)
+            {
+                board(i, j) = game.board(i, j)->clone();
+            }
+        }
+    }
+}
+
 // reload method adds ammo to character in the coordinates passed
 void mtm::Game::reload(const mtm::GridPoint &coordinates) {
     shared_ptr<Character> character = getCharacter(coordinates);
@@ -76,7 +90,19 @@ mtm::Game& mtm::Game::operator=(const mtm::Game &other)
     {
         return *this;
     }
+    //changing the dimension of board and doing a 'soft' copy
     this->board = other.board;
+    //making sure the games are separated
+    for (int i = 0; i < board.height() ; ++i)
+    {
+        for (int j = 0; j < board.width(); ++j)
+        {
+            if(other.board(i,j) != nullptr)
+            {
+                board(i, j) = other.board(i, j)->clone();
+            }
+        }
+    }
     return *this;
 }
 
@@ -235,3 +261,4 @@ void Game::clearDeads() {
         }
     }
 }
+

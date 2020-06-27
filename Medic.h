@@ -18,7 +18,6 @@ namespace mtm{
         ~Medic() override = default;
         void reload() override;
         char getTypeChar() const override ;
-        CharacterType getType() const override ;
         Team getTeam() const override ;
         bool legalMove(int distance) const override ;
         bool legalAttack(const GridPoint& src, const GridPoint& dst,int distance,

@@ -32,11 +32,6 @@ char Sniper::getTypeChar() const {
     return typeCharCpp;
 }
 
-// returns SNIPER
-CharacterType Sniper::getType() const {
-    return SNIPER;
-}
-
 // function checks if distance param is smaller than STEPS_NUM
 bool Sniper::legalMove(int distance) const {
     return distance <= STEPS_NUM;

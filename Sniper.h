@@ -20,7 +20,6 @@ namespace mtm{
         void reload() override ;
         bool legalMove(int distance) const override ;
         char getTypeChar() const override ;
-        CharacterType getType() const override ;
         Team getTeam() const override ;
         bool legalAttack(const GridPoint& src, const GridPoint& dst,int distance,
                 bool same_team, bool dst_empty) const override;

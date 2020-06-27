@@ -16,7 +16,7 @@ namespace mtm{
         void clearDeads();
     public:
         Game(int height, int width);
-        Game(const Game& game):board(game.board){}
+        Game(const Game& game);
         Game &operator=(const Game& other);
         void addCharacter(const GridPoint& coordinates, std::shared_ptr<Character> character);
         static std::shared_ptr<Character> makeCharacter(CharacterType type, Team team,

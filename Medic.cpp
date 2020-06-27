@@ -25,11 +25,6 @@ char mtm::Medic::getTypeChar() const {
     return typeCharCpp;
 }
 
-// returns MEDIC
-mtm::CharacterType mtm::Medic::getType() const {
-    return MEDIC;
-}
-
 // function checks if distance param is smaller than STEPS_NUM
 bool mtm::Medic::legalMove(int distance) const {
     return distance <= STEPS_NUM;

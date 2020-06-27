@@ -9,6 +9,22 @@
 #include "Auxiliaries.h"
 #include <string>
 
+/**
+* Template Array
+*
+* Implements a generic typed array.
+* with an Exception class of BadAccess
+*
+* The following functions are available:
+*   the big three - constructor , destructor and copy constructor.
+*   size		- Return the size of the array.
+*
+* The following operators are available:
+*   operator=      - Assignment of one matrix to the other
+*   operator[]      - Return reference to value
+*/
+
+
 namespace mtm {
     template<class T>
     class TemArray {
@@ -16,18 +32,86 @@ namespace mtm {
         int length;
     public:
         class BadAccess;
+
+/**
+*	Constructor: create a new Template Array
+*
+* @param
+* size - The Initial size of the Array(optional)
+* @return
+* 	The new Array
+* @assumption
+*   There is a default constructor for class T.
+*/
         explicit TemArray(int size = 10);
 
+/**
+*	Copy Constructor: create a copy Array
+*
+* @param
+* TemArray - The template Array which we copy the values from.
+* @return
+* 	The copied Array
+* @assumption
+*   There is a default constructor for class T.
+*   There is a '=' operator implement for class T.
+*/
         TemArray(const TemArray<T> &a);
 
+/**
+*    Destructor: Destroy the Template Array when her 'life' end.
+*
+* @return
+* 	No Return Value.
+* @assumption
+*   There is a default destructor for class T.
+*/
         ~TemArray();
 
+/**
+*	operator=: assign template array
+*
+* @param
+* TemArray - The template array which we copy the values from.
+* @return
+* 	The assigned array
+* @assumption
+*   There is a default constructor for class T.
+*   There is a default destructor for class T.
+*   There is a '=' operator implement for class T.
+*/
         TemArray &operator=(const TemArray<T> &a);
 
+/**
+*	size: Returns the amount of element in array.
+*
+* @return
+* 	Amount of elements
+*/
         int size() const;
 
+/**
+*	operator[]: Return element from Template Array
+*
+* @param
+* index - The index of the element
+* @return
+* 	Reference to the element
+* @exception
+*   Return BadAccess for invalid read of memory.
+*/
         T &operator[](int index);
 
+/**
+*	operator[]: Return a const element from Array
+*
+* @param
+* index - The index of the element
+* @return
+* 	Reference to the const element
+* @exception
+*   Return BadAccess for invalid read of memory.
+*/
         const T &operator[](int index) const;
     };
 
@@ -93,6 +177,17 @@ namespace mtm {
         return data[index];
     }
 
+
+/**
+* Exception Bad Access
+*
+* Implements of an exception class indicating a bad access to memory,
+* which Inherit from std::exception.
+*
+* The following functions are available:
+*   the big three - constructor , destructor and copy constructor(default).
+*   what		- Return info on the exception.
+*/
     template <class T>
     class TemArray<T>::BadAccess : public std::exception {
     public:
