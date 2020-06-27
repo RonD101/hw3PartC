@@ -16,9 +16,9 @@ namespace mtm{
         std::shared_ptr<Character> clone() const override;
         int reload() const override ;
         bool legalMove(int distance) const override ;
-//        void move(const GridPoint &src_coordinates, const GridPoint &dst_coordinates) const override;
         char getTypeChar() const override ;
         CharacterType getType() const override ;
+        char getTeam() const override ;
     };
 }
 #endif //HW3PARTC_SNIPER_H

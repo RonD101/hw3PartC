@@ -24,6 +24,7 @@ namespace mtm{
         virtual int reload() const = 0;
         virtual char getTypeChar() const= 0;
         virtual CharacterType getType() const= 0;
+        virtual char getTeam() const= 0;
         virtual bool legalMove(int distance) const = 0;
     };
 }

@@ -17,6 +17,7 @@ namespace mtm{
         virtual int reload() const override;
         char getTypeChar() const override ;
         CharacterType getType() const override ;
+        char getTeam() const override ;
         bool legalMove(int distance) const override ;
     };
 }
