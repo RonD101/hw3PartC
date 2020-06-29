@@ -29,7 +29,6 @@
 *
 */
 
-
 namespace mtm{
     class Character{
     protected:
@@ -97,12 +96,12 @@ namespace mtm{
 * @param
 * distance - the distance between current location to destination.
 * @return
-* 	True if move is legal (otherwise throw appropriate exception)
+* 	True if move is legal (otherwise throw appropriate exception).
 * @exception
 *   IllegalCell -   if character move out of board bounds.
 *   CellEmpty -     if the source cell is empty.
 *   MoveTooFar -    if character move to far according to personal rules.
-*   CellOccupied -  id destination cell is occupied.
+*   CellOccupied -  if destination cell is occupied.
 */
         virtual bool legalMove(int distance) const = 0;
 
@@ -110,17 +109,33 @@ namespace mtm{
 *	legalAttack: Check if attack is legal.
 *
 * @param
-* src - Attacker postion
-* index - The index of the element
-* index - The index of the element
-* index - The index of the element
+* src - Attacker position.
+* dst - Attack destination.
+* distance - Distance between src and dst.
+* same_team - True if the attacker and attacked character are from the same team, false otherwise.
+* dst_empty - True if attack destination have no character.
 * @return
-* 	Reference to the const element
+* 	True if attack met character rules (otherwise throw appropriate exception).
 * @exception
-*   Return BadAccess for invalid read of memory.
+*   OutOfRange -    if character attack out of personal range.
+*   OutOfAmmo -     if character is out of ammo.
+*   IllegalTarget -  if attack doesn't meet character personal rules.
 */
         virtual bool legalAttack(const GridPoint& src, const GridPoint& dst,int distance,
                 bool same_team, bool dst_empty) const = 0;
+
+/**
+*	attack: Commence character attack.
+*
+* @param
+* src - Attacker position.
+* dst - Attack destination.
+* distance - Distance between src and dst.
+* same_team - True if the attacker and attacked character are from the same team, false otherwise.
+* dst_empty - True if attack destination have no character.
+* @return
+* 	True if attack met character rules (otherwise throw appropriate exception).
+*/
         virtual void attack(const GridPoint& dst, bool same_team, std::vector<std::pair<GridPoint
                 ,units_t >>& grids_to_attack, std::pair<int,int> board_size) = 0;
         void addHealth(int value);
