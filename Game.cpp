@@ -49,25 +49,25 @@ void mtm::Game::reload(const mtm::GridPoint &coordinates) {
 */
 void mtm::Game::move(const mtm::GridPoint &src_coordinates, const mtm::GridPoint &dst_coordinates) {
     shared_ptr<Character> character = getCharacter(src_coordinates);
+    shared_ptr<Character> dst = getCharacter(dst_coordinates);
     if(character == nullptr)
     {
         throw CellEmpty();
     }
-    if(!getCharacter(dst_coordinates))
+    int distance = Game::distance(src_coordinates, dst_coordinates);
+    if(character->legalMove(distance))
     {
-        int distance = Game::distance(src_coordinates, dst_coordinates);
-        if(character->legalMove(distance))
+        if(dst == nullptr)
         {
             board(dst_coordinates.row,dst_coordinates.col) = board(src_coordinates.row,src_coordinates.col);
             board(src_coordinates.row,src_coordinates.col) = nullptr;
         } else
         {
-            throw MoveTooFar();
+            throw CellOccupied();
         }
-
-    }else
+    } else
     {
-        throw CellOccupied();
+        throw MoveTooFar();
     }
 }
 
@@ -146,7 +146,7 @@ void Game::addCharacter(const GridPoint &coordinates, std::shared_ptr<Character>
 // creates a new character with params passed. If health param is 0 or lower, throws exception IllegalArgument
 std::shared_ptr<Character>
 Game::makeCharacter(CharacterType type, Team team, units_t health, units_t ammo, units_t range, units_t power) {
-    if( health <= 0)
+    if( health <= 0 || type < 0 || team < 0 || ammo < 0 || range < 0 || power < 0)
     {
         throw IllegalArgument();
     }
@@ -212,12 +212,12 @@ bool Game::isOver(Team *winningTeam) const {
  */
 void Game::attack(const GridPoint &src_coordinates, const GridPoint &dst_coordinates) {
     shared_ptr<Character> src_character = getCharacter(src_coordinates);
+    shared_ptr<Character> dst_character = getCharacter(dst_coordinates);
     if(src_character == nullptr)
     {
         throw CellEmpty();
 
     }
-    shared_ptr<Character> dst_character = getCharacter(dst_coordinates);
     bool dst_empty = false;
     bool same_team = false;
     if(dst_character == nullptr)
