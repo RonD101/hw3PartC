@@ -7,6 +7,25 @@
 
 #include <iostream>
 
+/**
+* Implements Game's exception
+*
+* All of Game exception are in this file.
+*
+* The following exception are available:
+*   Exceptions.
+*   Exceptions::GameException.
+*   Exceptions::GameException::IllegalArgument.
+*   Exceptions::GameException::IllegalCell.
+*   Exceptions::GameException::CellEmpty.
+*   Exceptions::GameException::CellOccupied.
+*   Exceptions::GameException::MoveTooFar.
+*   Exceptions::GameException::OutOfRange.
+*   Exceptions::GameException::OutOfAmmo.
+*   Exceptions::GameException::IllegalTarget.
+*
+*/
+
 namespace mtm{
     class Exceptions : public std::exception{
     public:
