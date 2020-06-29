@@ -8,6 +8,25 @@
 #include "Character.h"
 #include <memory>
 
+/**
+* Implements the sniper class.
+*
+* Sniper inherits many of its functions from Character class.
+*
+* The following functions are inherited:
+*   destructor and copy constructor (all default).
+*   clone    - Return a smart pointer for independent object.
+*   reload		- Reload character ammo.
+*   getTypeChar	- Return character type.
+*   getTeam  - Return character team.
+*   legalMove  - Check if character intent move is legal.
+*   legalAttack		    - Check if character can attack is legal.
+*   attack	        - commence character attack.
+*
+*   constructor is not inheridted
+*
+*/
+
 namespace mtm{
     class Sniper: public Character{
         static const char typeCharCpp = 'N';
@@ -20,6 +39,17 @@ namespace mtm{
         static const int third_attack = 3;
         static const int double_damage = 2;
     public:
+
+        /**	Constructor: create a new sniper class character
+        *
+        * @param
+        * c_type - the type of the character (sniper)
+        * c_team - the character's team
+        * c_health - the character's health
+        * c_ammo - the character's ammo
+        * c_range - the character's range
+        * c_power - the character's power
+        */
         Sniper(CharacterType c_type,Team c_team, units_t c_health, units_t c_ammo, units_t c_range, units_t c_power);
         std::shared_ptr<Character> clone() const override;
         ~Sniper() override = default;
