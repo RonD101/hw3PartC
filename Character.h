@@ -128,17 +128,35 @@ namespace mtm{
 *	attack: Commence character attack.
 *
 * @param
-* src - Attacker position.
 * dst - Attack destination.
-* distance - Distance between src and dst.
 * same_team - True if the attacker and attacked character are from the same team, false otherwise.
 * dst_empty - True if attack destination have no character.
+* grids_to_attack - Array of potions and attack value indicating how we should attack and by how much.
+* board_size - Pair which contain board Dimension.
 * @return
-* 	True if attack met character rules (otherwise throw appropriate exception).
+* 	No return value.
+ * 	grids_to_attack is updated with attacks values and potion.
 */
         virtual void attack(const GridPoint& dst, bool same_team, std::vector<std::pair<GridPoint
                 ,units_t >>& grids_to_attack, std::pair<int,int> board_size) = 0;
-        void addHealth(int value);
+
+/**
+*	addHealth: Add health to character.
+*
+* @param
+* value - Amount of health to add.
+* @return
+* 	No return value.
+ * 	grids_to_attack is updated with attacks values and potion.
+*/
+        void addHealth(units_t value);
+
+/**
+*	getHealth: Return character health.
+*
+* @return
+* 	Character health.
+*/
         int getHealth();
     };
 }

@@ -8,7 +8,7 @@ void mtm::Character::removeShot() {
     ammo--;
 }
 
-void mtm::Character::addHealth(int value) {
+void mtm::Character::addHealth(units_t value) {
     health += value;
 }
 
