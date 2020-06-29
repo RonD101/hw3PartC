@@ -5,13 +5,9 @@
 #include "Medic.h"
 #include "Exceptions.h"
 
-#define AMMO_RELOAD 5
-#define STEPS_NUM 5
-#define AMMO_PER_SHOT 1
-
 // returns 5 (ammo reload of medic)
 void mtm::Medic::reload() {
-    ammo += AMMO_RELOAD;
+    ammo += ammo_reload;
 }
 
 std::shared_ptr<mtm::Character> mtm::Medic::clone() const {
@@ -27,7 +23,7 @@ char mtm::Medic::getTypeChar() const {
 
 // function checks if distance param is smaller than STEPS_NUM
 bool mtm::Medic::legalMove(int distance) const {
-    return distance <= STEPS_NUM;
+    return distance <= steps_num;
 }
 
 // constructor
@@ -58,7 +54,7 @@ bool mtm::Medic::legalAttack(const mtm::GridPoint &src,
     {
         throw OutOfRange();
     }
-    if (ammo < AMMO_PER_SHOT && !same_team)
+    if (ammo < ammo_per_shot && !same_team)
     {
         throw OutOfAmmo();
     }

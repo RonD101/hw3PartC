@@ -13,6 +13,12 @@ namespace mtm{
         static const char typeCharCpp = 'N';
         static const char typeCharPython = 'n';
         int attack_count = 1;
+        static const int ammo_reload = 2;
+        static const int steps_num =  4;
+        static const int ammo_per_shot = 1;
+        static const int divisor = 2;
+        static const int third_attack = 3;
+        static const int double_damage = 2;
     public:
         Sniper(CharacterType c_type,Team c_team, units_t c_health, units_t c_ammo, units_t c_range, units_t c_power);
         std::shared_ptr<Character> clone() const override;

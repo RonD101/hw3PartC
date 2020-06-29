@@ -8,8 +8,6 @@
 #include "Medic.h"
 #include "Sniper.h"
 
-#define SPACE ' '
-
 using std::shared_ptr;
 using namespace mtm;
 
@@ -120,7 +118,7 @@ std::ostream& mtm::operator<<(std::ostream &os, const Game &game) {
         for (int j = 0; j < game.board.width(); ++j) {
             if(game.getCharacter(GridPoint(i,j)) == nullptr)
             {
-                board_symbol += SPACE;
+                board_symbol += Game::space;
             }else
             {
                 board_symbol += game.getCharacter(GridPoint(i,j))->getTypeChar();

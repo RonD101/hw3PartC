@@ -5,12 +5,6 @@
 #include "Soldier.h"
 #include "Exceptions.h"
 
-#define AMMO_RELOAD 3
-#define STEPS_NUM 3
-#define AMMO_PER_SHOT 1
-#define DIVISOR 3
-#define HALF 2
-
 using namespace mtm;
 using std::shared_ptr;
 
@@ -20,7 +14,7 @@ std::shared_ptr<Character> mtm::Soldier::clone() const {
 
 // returns 3 (ammo reload of soldier)
 void mtm::Soldier::reload() {
-    ammo += AMMO_RELOAD;
+    ammo += ammo_reload;
 }
 
 // returns 'S' if in CPP team or 's' if in PYTHON team
@@ -32,7 +26,7 @@ char Soldier::getTypeChar() const {
 
 // function checks if distance param is smaller than STEPS_NUM
 bool Soldier::legalMove(int distance) const {
-    return distance <= STEPS_NUM;
+    return distance <= steps_num;
 }
 
 // constructor
@@ -62,7 +56,7 @@ bool Soldier::legalAttack(const GridPoint &src, const GridPoint &dst,
     {
         throw OutOfRange();
     }
-    if (ammo < AMMO_PER_SHOT)
+    if (ammo < ammo_per_shot)
     {
         throw OutOfAmmo();
     }
@@ -80,14 +74,14 @@ bool Soldier::legalAttack(const GridPoint &src, const GridPoint &dst,
 void Soldier::attack(const GridPoint &dst, bool same_team, std::vector<std::pair<GridPoint
         ,units_t >>& grids_to_attack, std::pair<int,int> board_size) {
     units_t damage = -power;
-    units_t third_range = static_cast<int>(std::ceil(double(range)/DIVISOR));
+    units_t third_range = static_cast<int>(std::ceil(double(range)/divisor));
     for (int i = 0; i < board_size.first; ++i) {
         for (int j = 0; j < board_size.second; ++j) {
             GridPoint tmp(i,j);
             if(Soldier::distance(dst,tmp) <= third_range)
             {
                 grids_to_attack.push_back(std::pair<GridPoint,units_t >(tmp,
-                        (tmp == dst)? damage : static_cast<int>(std::floor(double(damage)/HALF))));
+                        (tmp == dst)? damage : static_cast<int>(std::floor(double(damage)/half))));
             }
         }
     }

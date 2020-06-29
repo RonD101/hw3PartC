@@ -12,6 +12,11 @@ namespace mtm{
 class Soldier: public Character{
     static const char typeCharCpp = 'S';
     static const char typeCharPython = 's';
+    static const int ammo_reload = 3;
+    static const int steps_num = 3;
+    static const int ammo_per_shot = 1;
+    static const int divisor = 3;
+    static const int half = 2;
 public:
     Soldier(CharacterType c_type,Team c_team, units_t c_health, units_t c_ammo, units_t c_range, units_t c_power);
     ~Soldier() override = default;

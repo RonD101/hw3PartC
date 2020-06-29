@@ -14,6 +14,7 @@ namespace mtm{
         std::shared_ptr<Character> getCharacter(const GridPoint& coordinates) const;
         static int distance(const GridPoint &src_coordinates, const GridPoint &dst_coordinates);
         void clearDeads();
+        static const char space = ' ';
     public:
         Game(int height, int width);
         Game(const Game& game);

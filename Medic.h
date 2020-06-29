@@ -12,6 +12,9 @@ namespace mtm{
     class Medic: public Character{
         static const char typeCharCpp = 'M';
         static const char typeCharPython = 'm';
+        static const int ammo_reload = 5;
+        static const int steps_num = 5;
+        static const int ammo_per_shot = 1;
     public:
         Medic(CharacterType c_type,Team c_team, units_t c_health, units_t c_ammo, units_t c_range, units_t c_power);
         std::shared_ptr<Character> clone() const override;
