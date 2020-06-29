@@ -42,7 +42,7 @@ void mtm::Game::reload(const mtm::GridPoint &coordinates) {
 
 /** move method moves one character in the src_coordinates param to dst_coordinates.
      if the source coordinates are empty, throw exception CellEmpty
-     function legalMove returns false if destination is to far. Exception MoveTooFar is thrown
+     function legalMove returns false if destination is too far. Exception MoveTooFar is thrown
      if the destination is occupied, throws exception CellOccupied
 */
 void mtm::Game::move(const mtm::GridPoint &src_coordinates, const mtm::GridPoint &dst_coordinates) {
@@ -141,7 +141,8 @@ void Game::addCharacter(const GridPoint &coordinates, std::shared_ptr<Character>
     board(coordinates.row,coordinates.col) = character;
 }
 
-// creates a new character with params passed. If health param is 0 or lower, throws exception IllegalArgument
+// creates a new character with params passed.
+// If health param is 0 or lower or if other params are negative, throws exception IllegalArgument
 std::shared_ptr<Character>
 Game::makeCharacter(CharacterType type, Team team, units_t health, units_t ammo, units_t range, units_t power) {
     if( health <= 0 || type < 0 || team < 0 || ammo < 0 || range < 0 || power < 0)
@@ -199,7 +200,7 @@ bool Game::isOver(Team *winningTeam) const {
 
 /** attack method makes character in src_coordinates attack character in dst_coordinates
     if src_coordinates is empty, throws exception CellEmpty.
-    if src_coordinates or dst_character are empty, getCharacter function throws exception IllegalCell
+    if src_coordinates or dst_character are outside the board, getCharacter function throws exception IllegalCell
     if dst_character is out of range of the attacker, legalAttack function throws exception OutOfRange
     if character in src_coordinates dosn't have enough ammo to attack, legalAttack function throws exception OutOfAmmo
     legalAttack function throws exception IllegalTarget if:

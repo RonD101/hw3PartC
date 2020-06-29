@@ -105,6 +105,8 @@ namespace mtm {
         * value - Initial value (optional)
         * @return
         * 	The new matrix
+        * 	@assumptions
+        * 	    there is = operator for class T
         */
         explicit Matrix(const Dimensions& dimensions, T value = T());
         /**
@@ -114,6 +116,8 @@ namespace mtm {
         * matrix - The matrix which we copy the values from.
         * @return
         * 	The copied matrix
+        * @assumptions
+        *   there is = operator for class T
         */
         Matrix(const Matrix& matrix);
         /**    Destructor: Destroy the matrix when her 'life' end.
@@ -128,6 +132,8 @@ namespace mtm {
         *
         * @return
         * 	The transposed matrix
+        * @assumption
+        *   There is = operator for class T
         */
         Matrix transpose() const ;
         /**	Diagonal: Returns a copy of Diagonal matrix.
@@ -136,6 +142,8 @@ namespace mtm {
                 * dim - the dimension of the Diagonal matrix
         * @return
         * 	The Diagonal matrix
+        * @assumption
+        *   There is = operator for class T
         */
         static Matrix<T> Diagonal(int dim, T value);
 		/**
@@ -166,6 +174,8 @@ namespace mtm {
                     * condition is of class Condition
         * @return
         * 	The applied matrix
+        * @assumptions
+        *  there is = operator for class T
         */
         Matrix apply(Condition condition) const;
         /**	operator=: assign matrix
@@ -174,6 +184,8 @@ namespace mtm {
         * matrix - The matrix which we copy the values from.
         * @return
         * 	The assigned matrix
+         * 	@assumptions
+         *      there is = operator for class T
         */
         Matrix& operator=(const Matrix& matrix);
         /**	operator+=: add value to each element in matrix, and then assign the matrix
@@ -188,6 +200,8 @@ namespace mtm {
         *
         * @return
         * 	The copied matrix
+        * @assumption
+        *   There is =,- operator for class T
         */
         Matrix operator-() const ;
 /**
@@ -228,6 +242,8 @@ namespace mtm {
     * matrix2 - Second matrix to add
     * @return
     * 	The added matrix
+     * 	@assumptions
+     * 	Assuming there is =,+ operators for class T
     */
     template <class T>
     Matrix<T> operator+(const Matrix<T>& matrix1, const Matrix<T>& matrix2);
@@ -272,6 +288,8 @@ namespace mtm {
     * value - Value to compare to.
     * @return
     * 	The trues and false's matrix
+    * @assumptions
+    *   There are the <,<=,>,>=,==,!= operators for class T
     */ 
     template <class T>
     Matrix<bool> operator<(Matrix<T>& matrix, T value);
@@ -292,6 +310,8 @@ namespace mtm {
     * matrix - The matrix to check.
     * @return
     * 	True if any of the element is different from zero, and false otherwise.
+    * @assumption
+    * 	Assuming there is != operator for class T
     */
 	template <class T>
     bool any(const Matrix<T>& matrix);
@@ -302,7 +322,8 @@ namespace mtm {
     * matrix - The matrix to check.
     * @return
     * 	True if all the element are different from zero, and false otherwise.
-    */
+    * @assumption
+    * 	Assuming there is == operator for class T    */
     template <class T>
     bool all(const Matrix<T>& matrix);
 
@@ -603,7 +624,7 @@ namespace mtm {
     /////////////////////////////////////////////////////////////////////
 
     // operator= for Matrix
-    // Assuming there is = operator for class T					   
+    // Assuming there is = operator for class T
     template<class T>
     Matrix<T>& Matrix<T>::operator=(const Matrix<T> &matrix) {
         if(this == & matrix)
