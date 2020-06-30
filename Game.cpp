@@ -53,6 +53,10 @@ void mtm::Game::move(const mtm::GridPoint &src_coordinates, const mtm::GridPoint
         throw CellEmpty();
     }
     int distance = Game::distance(src_coordinates, dst_coordinates);
+    if(distance == 0)
+    {
+        return;
+    }
     if(character->legalMove(distance))
     {
         if(dst == nullptr)
