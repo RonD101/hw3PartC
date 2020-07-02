@@ -3,15 +3,16 @@
 //
 
 #include "Character.h"
+namespace mtm{
+    void Character::removeShot() {
+        ammo--;
+    }
 
-void mtm::Character::removeShot() {
-    ammo--;
-}
+    void Character::addHealth(units_t value) {
+        health += value;
+    }
 
-void mtm::Character::addHealth(units_t value) {
-    health += value;
-}
-
-int mtm::Character::getHealth() {
-    return health;
+    int Character::getHealth() {
+        return health;
+    }
 }
