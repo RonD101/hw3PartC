@@ -39,7 +39,6 @@ namespace mtm{
         units_t power;
         CharacterType type;
     public:
-
 /**
 *	Character destructor: pure virtual function which destroy and free
  *	    all of the character data.

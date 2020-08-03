@@ -155,7 +155,5 @@ int main() {
     cout << g6 << endl;
     g5.move(GridPoint(0,3),GridPoint(0,4));
     cout << g5 << endl;
-
-
     return 0;
 }

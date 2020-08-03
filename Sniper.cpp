@@ -3,7 +3,6 @@
 //
 
 #include "Sniper.h"
-#include "Game.h"
 #include "Exceptions.h"
 
 using std::shared_ptr;

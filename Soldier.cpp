@@ -8,7 +8,7 @@
 using std::shared_ptr;
 
 namespace mtm{
-    std::shared_ptr<Character> Soldier::clone() const {
+    shared_ptr<Character> Soldier::clone() const {
         return shared_ptr<Character>(new Soldier(*this));
     }
 

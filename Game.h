@@ -62,7 +62,6 @@ namespace mtm{
         void clearDeads();
         static const char space = ' ';
     public:
-
         /**	Constructor: create a new game
         *
         * @param
